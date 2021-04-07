@@ -9,8 +9,6 @@ public class NotepadApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(NotepadApplication.class, args);
-        System.out.println("ok");
-        System.out.println("dddd");
     }
 
 }
