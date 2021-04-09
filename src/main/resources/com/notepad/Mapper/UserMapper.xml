@@ -4,4 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.notepad.mapper.UserMapper">
 
+    <select id="findAll" resultType="User">
+        select * from notepad.user
+    </select>
+
+    <insert id="add" parameterType="User">
+        insert into notepad.user
+        values (#{user_id},#{username},#{head_portrait})
+    </insert>
+
+    <delete id="delete" parameterType="String">
+        delete from notepad.user where user_id = #{user_id}
+    </delete>
+
+    <update id="update" parameterType="User">
+        update notepad.user
+        set username =#{username},head_portrait =#{head_portrait}
+        where user_id = #{user_id}
+    </update>
+
+    <select id="find" parameterType="String" resultType="User">
+        select *
+        from notepad.user
+        where user_id = #{user_id};
+    </select>
+
 </mapper>

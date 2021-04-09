@@ -1,10 +1,10 @@
-package com.notepad.mapper;
+package com.notepad.service;
 
 import com.notepad.pojo.User;
 
 import java.util.List;
 
-public interface UserMapper {
+public interface UserService {
     List<User> findAll();
     void add(User user);
     void delete(int user_id);

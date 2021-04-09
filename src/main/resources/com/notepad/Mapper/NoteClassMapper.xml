@@ -4,4 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.notepad.mapper.NoteClassMapper">
 
+    <select id="findAll" resultType="NoteClass">
+        select * from notepad.note_class
+    </select>
+
+    <insert id="add" parameterType="NoteClass">
+        insert into notepad.note_class
+        values (#{note_class})
+    </insert>
+
+    <delete id="delete" parameterType="Integer">
+        delete from notepad.note_class where note_class_id = #{note_class_id}
+    </delete>
+
+    <update id="update" parameterType="NoteClass">
+        update notepad.note_class
+        set note_class=#{note_class}
+        where note_class_id = #{note_class_id}
+    </update>
+
+    <select id="find" parameterType="Integer" resultType="Note">
+        select *
+        from notepad.note_class
+        where note_class_id = #{note_class_id};
+    </select>
+
 </mapper>
