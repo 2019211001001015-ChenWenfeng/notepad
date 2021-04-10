@@ -21,9 +21,10 @@ public class UserController {
 
     @GetMapping("/login")
     //登录方法
-    public User login(User user , HttpSession session){
+    public User login(User user ){
         userService.add(user);
         System.out.println(user);
         return user;
     }
+
 }

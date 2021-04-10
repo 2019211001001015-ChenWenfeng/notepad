@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.notepad.mapper.UnfinishClassMapper">
+
+    <select id="findAll" resultType="UnfinishClass">
+        select * from unfinish_class;
+    </select>
+
+    <insert id="add" parameterType="UnfinishClass">
+        insert into unfinish_class
+        values (#{unfinish_class});
+    </insert>
+
+    <delete id="delete" parameterType="Integer">
+        delete from unfinish_class
+        where unfinish_class_id = #{unfinish_class_id};
+    </delete>
+
+    <update id="update" parameterType="UnfinishClass">
+        update unfinish_class
+        set unfinish_class = #{unfinish_class}
+        where unfinish_class_id = #{unfinish_class_id};
+    </update>
+
+    <select id="find" parameterType="Integer" resultType="Unfinish">
+        select *
+        from unfinish
+        where unfinish_class_id = #{unfinish_class_id};
+    </select>
+
+</mapper>
