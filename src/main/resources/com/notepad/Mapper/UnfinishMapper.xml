@@ -3,27 +3,27 @@
 <mapper namespace="com.notepad.mapper.UnfinishMapper">
 
     <select id="findAll" resultType="Unfinish">
-        select * from unfinish;
+        select * from notepad.unfinish;
     </select>
 
     <insert id="add" parameterType="Unfinish">
-        insert into unfinish
+        insert into notepad.unfinish
         values (#{unfinish_id},#{unfinish_content},#{unfinish_date},#{unfinish_class_id},#{unfinish_collect});
     </insert>
 
     <delete id="delete" parameterType="Integer">
-        delete from unfinish where unfinish_id = #{unfinish_id};
+        delete from notepad.unfinish where unfinish_id = #{unfinish_id};
     </delete>
 
     <update id="update" parameterType="Unfinish" >
-        update unfinish
+        update notepad.unfinish
         set unfinish_content = #{unfinish_content},unfinish_date = #{unfinish_date},unfinish_class_id = #{unfinish_class_id},unfinish_collect = #{unfinish_collect }
         where unfinish_id = #{unfinish_id };
     </update>
 
     <select id="find" parameterType="Integer" resultType="Unfinish">
         select *
-        from unfinish
+        from notepad.unfinish
         where unfinish_id = #{unfinish_id };
     </select>
 
