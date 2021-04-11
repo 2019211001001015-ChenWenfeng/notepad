@@ -18,26 +18,30 @@ public class UnfinishClassServiceImpl implements UnfinishClassService {
 
     @Override
     public List<UnfinishClass> findAll() {
-        return null;
+        List<UnfinishClass> unfinishClasses = unfinishClassMapper.findAll();
+        return unfinishClasses;
     }
 
     @Override
     public void add(UnfinishClass unfinishClass) {
+        unfinishClassMapper.add(unfinishClass);
 
     }
 
     @Override
     public void delete(int unfininsh_class_id) {
+        unfinishClassMapper.delete(unfininsh_class_id);
 
     }
 
     @Override
     public void update(UnfinishClass unfinishClass) {
-
+        unfinishClassMapper.update(unfinishClass);
     }
 
     @Override
     public UnfinishClass find(int unfinish_class_id) {
-        return null;
+        UnfinishClass unfinishClass = unfinishClassMapper.find(unfinish_class_id);
+        return unfinishClass;
     }
 }

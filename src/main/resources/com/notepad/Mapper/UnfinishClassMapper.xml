@@ -7,7 +7,7 @@
     </select>
 
     <insert id="add" parameterType="UnfinishClass">
-        insert into unfinish_class
+        insert into unfinish_class(unfinish_class)
         values (#{unfinish_class});
     </insert>
 

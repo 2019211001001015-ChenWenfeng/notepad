@@ -2,8 +2,12 @@ package com.notepad.service.impl;
 
 import com.notepad.pojo.NoteClass;
 import com.notepad.service.NoteClassService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+@Service
+@Transactional
 
 public class NoteClassServiceImpl implements NoteClassService {
     @Override

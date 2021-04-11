@@ -6,9 +6,10 @@
         select * from unfinish;
     </select>
 
+
     <insert id="add" parameterType="Unfinish">
-        insert into unfinish
-        values (#{unfinish_id},#{unfinish_content},#{unfinish_date},#{unfinish_class_id},#{unfinish_collect});
+        insert into unfinish(unfinish_content,unfinish_date,unfinish_class_id,unfinish_collect)
+        values (#{unfinish_content},#{unfinish_date},#{unfinish_class_id},#{unfinish_collect});
     </insert>
 
     <delete id="delete" parameterType="Integer">
@@ -17,7 +18,7 @@
 
     <update id="update" parameterType="Unfinish" >
         update unfinish
-        set unfinish_content = #{unfinish_content},unfinish_date = #{unfinish_date},unfinish_class_id = #{unfinish_class_id},unfinish_collect = #{unfinish_collect }
+        set unfinish_content = #{unfinish_content},unfinish_date = #{unfinish_date},unfinish_class_id = #{unfinish_class_id},unfinish_collect = #{unfinish_collect },complete =#{complete}
         where unfinish_id = #{unfinish_id };
     </update>
 
