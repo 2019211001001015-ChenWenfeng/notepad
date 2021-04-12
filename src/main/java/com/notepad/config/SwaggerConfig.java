@@ -24,12 +24,12 @@ import java.util.ArrayList;
 
 public class SwaggerConfig {
 
-
-    @Bean
-    public  Docket docket2()
-    {
-        return new Docket(DocumentationType.SWAGGER_2).groupName("陆乾承");
-    }
+//
+//    @Bean
+//    public  Docket docket2()
+//    {
+//        return new Docket(DocumentationType.SWAGGER_2).groupName("陆乾承");
+//    }
     @Bean
 //    enable是否启用swagger，false不能启用
     public Docket docket(Environment environment){

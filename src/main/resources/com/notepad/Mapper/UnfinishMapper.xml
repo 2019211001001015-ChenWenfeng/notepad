@@ -3,7 +3,9 @@
 <mapper namespace="com.notepad.mapper.UnfinishMapper">
 
     <select id="findAll" resultType="Unfinish">
-        select * from unfinish;
+        select * from unfinish ,unfinish_class
+        where unfinish.unfinish_class_id = unfinish_class.unfinish_class_id
+        order by unfinish_date desc;
     </select>
 
 

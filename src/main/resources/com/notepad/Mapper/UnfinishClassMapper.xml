@@ -6,7 +6,7 @@
         select * from unfinish_class;
     </select>
 
-    <insert id="add" parameterType="UnfinishClass">
+    <insert id="add" parameterType="string">
         insert into unfinish_class(unfinish_class)
         values (#{unfinish_class});
     </insert>
@@ -22,10 +22,16 @@
         where unfinish_class_id = #{unfinish_class_id};
     </update>
 
-    <select id="find" parameterType="Integer" resultType="Unfinish">
+    <select id="find_id" parameterType="Integer" resultType="UnfinishClass">
         select *
-        from unfinish
+        from unfinish_class
         where unfinish_class_id = #{unfinish_class_id};
+    </select>
+
+    <select id="find_class" parameterType="String" resultType="UnfinishClass">
+        select *
+        from unfinish_class
+        where unfinish_class = #{unfinish_class};
     </select>
 
 </mapper>

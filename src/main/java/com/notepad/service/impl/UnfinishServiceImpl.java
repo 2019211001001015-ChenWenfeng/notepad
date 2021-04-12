@@ -20,8 +20,8 @@ public class UnfinishServiceImpl implements UnfinishService {
     @Override
     public List<Unfinish> findAll() {
 
-        List<Unfinish> unfinishList = unfinishMapper.findAll();
-        return unfinishList;
+
+        return  unfinishMapper.findAll();
     }
 
 
@@ -46,7 +46,7 @@ public class UnfinishServiceImpl implements UnfinishService {
 
     @Override
     public Unfinish find(int unfinish_id) {
-        Unfinish unfinish = unfinishMapper.find(unfinish_id);
-        return unfinish;
+
+        return unfinishMapper.find(unfinish_id);
     }
 }
