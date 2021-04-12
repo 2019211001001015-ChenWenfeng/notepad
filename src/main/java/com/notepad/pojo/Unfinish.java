@@ -16,11 +16,12 @@ import java.util.Date;
 public class Unfinish {
 
 
-    public Unfinish(String unfinish_content, Date unfinish_date, int unfinish_class_id, int unfinish_collect) {
+    public Unfinish(String unfinish_content, Date unfinish_date, int unfinish_class_id, int unfinish_collect, int complete) {
         this.unfinish_content = unfinish_content;
         this.unfinish_date = unfinish_date;
         this.unfinish_class_id = unfinish_class_id;
         this.unfinish_collect = unfinish_collect;
+        this.complete = complete;
     }
 
     @ApiModelProperty("待办id")//给字段增加中文注释
@@ -35,7 +36,10 @@ public class Unfinish {
     @ApiModelProperty("待办分类的id")
     private int unfinish_class_id;
 
-    @ApiModelProperty("待办是否收藏")
+    @ApiModelProperty("待办数量")
     private int unfinish_collect;
+
+    @ApiModelProperty("待办是否完成")
+    private int complete;
 
 }

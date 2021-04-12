@@ -7,8 +7,10 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface UnfinishMapper {
-
+//查询出所有待办
     List<Unfinish> findAll();
+
+
     void add(Unfinish unfinish);
     void delete(int unfinish_id);
     void update(Unfinish unfinish);

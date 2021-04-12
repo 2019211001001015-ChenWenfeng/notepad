@@ -26,7 +26,15 @@
     <select id="find" parameterType="String" resultType="User">
         select *
         from notepad.user
-        where user_id = #{user_id};
+        where user_id = #{user_id}
+    </select>
+
+    <select id="login" resultType="User">
+        select *
+        from notepad.user
+        where username = #{username}
+        and user_id = #{user_id}
+        and head_portrait = #{head_portrait}
     </select>
 
 </mapper>

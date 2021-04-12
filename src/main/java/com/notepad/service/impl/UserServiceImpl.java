@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
     public List<User> findAll() {
-        return null;
+        return userMapper.findAll();
     }
 
     @Override
@@ -30,16 +30,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(int user_id) {
-
+        userMapper.delete(user_id);
     }
 
     @Override
     public void update(User user) {
-
+        userMapper.update(user);
     }
 
     @Override
     public User find(int user_id) {
-        return null;
+        return userMapper.find(user_id);
     }
 }
