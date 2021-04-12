@@ -1,6 +1,7 @@
 package com.notepad.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ public class Unfinish {
     private String unfinish_content;
 
     @ApiModelProperty("待办时间")
+//    @JsonFormat()
     private Date unfinish_date;
 
     @ApiModelProperty("待办分类的id")

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class SwaggerConfig {
 
-
+//
 //    @Bean
 //    public  Docket docket2()
 //    {
