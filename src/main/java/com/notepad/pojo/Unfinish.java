@@ -17,13 +17,18 @@ import java.util.Date;
 public class Unfinish {
 
 
-    public Unfinish(String unfinish_content, Date unfinish_date, int unfinish_class_id, int unfinish_collect, int complete) {
+    public Unfinish(int unfinish_id, String unfinish_content, Date unfinish_date, int unfinish_class_id, int unfinish_collect, int complete, Date top_time) {
+        this.unfinish_id = unfinish_id;
         this.unfinish_content = unfinish_content;
         this.unfinish_date = unfinish_date;
         this.unfinish_class_id = unfinish_class_id;
         this.unfinish_collect = unfinish_collect;
         this.complete = complete;
+        this.top_time = top_time;
     }
+
+    @ApiModelProperty("用户id")//给字段增加中文注释
+    private String user_id;
 
     @ApiModelProperty("待办id")//给字段增加中文注释
     private int unfinish_id;
@@ -31,7 +36,7 @@ public class Unfinish {
     @ApiModelProperty("待办内容")
     private String unfinish_content;
 
-    @ApiModelProperty("待办时间")
+    @ApiModelProperty("待办创建时间")
 //    @JsonFormat()
     private Date unfinish_date;
 
@@ -43,5 +48,8 @@ public class Unfinish {
 
     @ApiModelProperty("待办是否完成")
     private int complete;
+
+    @ApiModelProperty("置顶时间")
+    private Date top_time;
 
 }

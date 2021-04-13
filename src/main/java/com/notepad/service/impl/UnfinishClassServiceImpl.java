@@ -23,8 +23,8 @@ public class UnfinishClassServiceImpl implements UnfinishClassService {
     }
 
     @Override
-    public void add(String clas) {
-        unfinishClassMapper.add(clas);
+    public void add(String unfininsh_class_name) {
+        unfinishClassMapper.add(unfininsh_class_name);
 
     }
 
@@ -46,7 +46,7 @@ public class UnfinishClassServiceImpl implements UnfinishClassService {
     }
 
     @Override
-    public UnfinishClass find_class(String unfinish_class) {
-        return unfinishClassMapper.find_class(unfinish_class);
+    public UnfinishClass find_class(String unfinish_class_name) {
+        return unfinishClassMapper.find_class(unfinish_class_name);
     }
 }

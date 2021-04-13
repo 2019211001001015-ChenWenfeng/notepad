@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 @ApiModel("待办分类")
 public class UnfinishClass {
 
-    public UnfinishClass(String unfinish_class) {
-        this.unfinish_class = unfinish_class;
+    public UnfinishClass(String unfinish_class_name) {
+        this.unfinish_class_name = unfinish_class_name;
     }
 
     @ApiModelProperty("待办分类id")
     private int unfinish_class_id;
 
     @ApiModelProperty("待办分类名称")
-    private String unfinish_class;
+    private String unfinish_class_name;
 }

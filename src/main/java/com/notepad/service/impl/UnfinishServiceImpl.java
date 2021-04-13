@@ -45,6 +45,11 @@ public class UnfinishServiceImpl implements UnfinishService {
     }
 
     @Override
+    public void update_id(int id,int unfinish_class_id) {
+        unfinishMapper.update_id(id,unfinish_class_id);
+    }
+
+    @Override
     public Unfinish find(int unfinish_id) {
 
         return unfinishMapper.find(unfinish_id);

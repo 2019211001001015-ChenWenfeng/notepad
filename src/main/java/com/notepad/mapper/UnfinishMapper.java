@@ -14,5 +14,6 @@ public interface UnfinishMapper {
     void add(Unfinish unfinish);
     void delete(int unfinish_id);
     void update(Unfinish unfinish);
+    void update_id(@Param("id") int id,@Param("unfinish_class_id") int unfinish_class_id);
     Unfinish find(int unfinish_id);
 }

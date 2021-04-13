@@ -32,7 +32,7 @@ public class JsonData {
 
     public Json fail(Object object)
     {
-//        设置200为成功
+//        设置500为失败
         Json json = new Json();
         json.setMessage("操作未执行成功！！！");
         json.setCode(500);
@@ -43,7 +43,7 @@ public class JsonData {
     }
     public Json fail()
     {
-//        设置200为成功
+//        设置500为失败
         Json json = new Json();
         json.setMessage("操作未执行成功！！！");
         json.setCode(500);

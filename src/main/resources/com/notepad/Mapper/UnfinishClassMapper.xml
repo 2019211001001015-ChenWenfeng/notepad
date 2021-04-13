@@ -6,9 +6,9 @@
         select * from notepad.unfinish_class;
     </select>
 
-    <insert id="add" parameterType="UnfinishClass">
-        insert into notepad.unfinish_class
-        values (#{unfinish_class});
+    <insert id="add" parameterType="String">
+        insert into notepad.unfinish_class(unfinish_class_name)
+        values (#{unfinish_class_name});
     </insert>
 
     <delete id="delete" parameterType="Integer">
@@ -18,14 +18,20 @@
 
     <update id="update" parameterType="UnfinishClass">
         update notepad.unfinish_class
-        set unfinish_class = #{unfinish_class}
+        set unfinish_class_name = #{unfinish_class_name}
         where unfinish_class_id = #{unfinish_class_id};
     </update>
 
-    <select id="find" parameterType="Integer" resultType="Unfinish">
+    <select id="find_id" parameterType="Integer" resultType="UnfinishClass">
         select *
-        from notepad.unfinish
+        from notepad.unfinish_class
         where unfinish_class_id = #{unfinish_class_id};
+    </select>
+
+    <select id="find_class" parameterType="String" resultType="UnfinishClass">
+        select *
+        from notepad.unfinish_class
+        where unfinish_class_name = #{unfinish_class_name};
     </select>
 
 </mapper>
