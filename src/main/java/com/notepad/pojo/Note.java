@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -19,6 +20,7 @@ public class Note {
     private Date note_date;
     private int note_class_id;
     //优先级
+    private Date top;
     private int note_rank;
     private int note_collect;
     private Date delete_time;

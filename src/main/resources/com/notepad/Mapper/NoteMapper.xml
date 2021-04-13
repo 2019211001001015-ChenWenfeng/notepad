@@ -10,7 +10,7 @@
 
     <insert id="add" parameterType="Note">
         insert into notepad.note
-        values (#{note_id},#{note_title},#{note_pic},#{note_content},#{note_date},#{note_class_id},#{note_rank},#{note_collect},#{delete_time})
+        values (#{note_id},#{note_title},#{note_pic},#{note_content},#{note_date},#{note_class_id},#{top},#{note_rank},#{note_collect},#{delete_time})
     </insert>
 
     <delete id="delete" parameterType="Integer">
@@ -19,7 +19,7 @@
 
     <update id="update" parameterType="Note">
         update notepad.note
-        set note_title = #{note_title},note_pic = #{note_pic},note_content = #{note_content},note_date = #{note_date},note_class_id= #{note_class_id},note_rank=#{note_rank},note_collect=#{note_collect},delete_time=#{delete_time}
+        set note_title = #{note_title},note_pic = #{note_pic},note_content = #{note_content},note_date = #{note_date},note_class_id= #{note_class_id},top=#{top},note_rank=#{note_rank},note_collect=#{note_collect},delete_time=#{delete_time}
         where note_id = #{note_id}
     </update>
 
