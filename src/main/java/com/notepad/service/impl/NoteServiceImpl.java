@@ -16,9 +16,13 @@ public class NoteServiceImpl implements NoteService {
     @Autowired
     private NoteMapper noteMapper;
     @Override
-    public List<Note> findAll() {
+    public List<Note> findAll(String user_id) {
+        return noteMapper.findAll(user_id);
+    }
 
-        return noteMapper.findAll();
+    @Override
+    public List<Note> findAllByAll() {
+        return noteMapper.findAllByAll();
     }
 
     @Override

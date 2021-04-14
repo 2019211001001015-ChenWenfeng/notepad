@@ -4,13 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.notepad.mapper.NoteMapper">
 
-    <select id="findAll" resultType="Note">
+    <select id="findAll" parameterType="String" resultType="Note">
+        select * from notepad.note where user_id = #{user_id}
+    </select>
+    <select id="findAllByAll" resultType="Note">
         select * from notepad.note
     </select>
 
     <insert id="add" parameterType="Note">
-        insert into notepad.note
-        values (#{note_id},#{note_title},#{note_pic},#{note_content},#{note_date},#{note_class_id},#{top},#{note_rank},#{note_collect},#{delete_time})
+        insert into notepad.note(user_id, note_title, note_pic, note_content, note_date, note_class_id, top_time, note_collect, delete_time)
+        values (#{user_id},#{note_title},#{note_pic},#{note_content},#{note_date},#{note_class_id},#{top_time},#{note_collect},#{delete_time})
     </insert>
 
     <delete id="delete" parameterType="Integer">
@@ -19,7 +22,7 @@
 
     <update id="update" parameterType="Note">
         update notepad.note
-        set note_title = #{note_title},note_pic = #{note_pic},note_content = #{note_content},note_date = #{note_date},note_class_id= #{note_class_id},top=#{top},note_rank=#{note_rank},note_collect=#{note_collect},delete_time=#{delete_time}
+        set note_title = #{note_title},note_pic = #{note_pic},note_content = #{note_content},note_date = #{note_date},note_class_id= #{note_class_id},top_time=#{top_time},note_collect=#{note_collect},delete_time=#{delete_time}
         where note_id = #{note_id}
     </update>
 

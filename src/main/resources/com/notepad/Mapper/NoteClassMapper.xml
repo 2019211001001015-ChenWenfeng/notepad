@@ -9,8 +9,8 @@
     </select>
 
     <insert id="add" parameterType="NoteClass">
-        insert into notepad.note_class
-        values (#{note_class})
+        insert into notepad.note_class(note_class_name)
+        values (#{note_class_name})
     </insert>
 
     <delete id="delete" parameterType="Integer">
@@ -19,7 +19,7 @@
 
     <update id="update" parameterType="NoteClass">
         update notepad.note_class
-        set note_class=#{note_class}
+        set note_class_name=#{note_class_name}
         where note_class_id = #{note_class_id}
     </update>
 
