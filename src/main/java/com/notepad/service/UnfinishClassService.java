@@ -8,7 +8,7 @@ import java.util.List;
 public interface UnfinishClassService {
 
     List<UnfinishClass> findAll();
-    void add(String clas);
+    void add(String unfininsh_class_name);
     void delete(int unfininsh_class_id);
     void update(UnfinishClass unfinishClass);
 
@@ -16,5 +16,5 @@ public interface UnfinishClassService {
     UnfinishClass find_id(int unfinish_class_id);
 
     //    通过查询单板分类名称，查询待办分类
-    UnfinishClass find_class(String unfinish_class);
+    UnfinishClass find_class(String unfinish_class_name);
 }

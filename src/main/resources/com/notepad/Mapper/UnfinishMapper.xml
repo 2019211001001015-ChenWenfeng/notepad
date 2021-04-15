@@ -7,8 +7,8 @@
     </select>
 
     <insert id="add" parameterType="Unfinish">
-        insert into notepad.unfinish
-        values (#{unfinish_id},#{unfinish_content},#{unfinish_date},#{unfinish_class_id},#{unfinish_collect});
+        insert into notepad.unfinish(user_id,unfinish_content,unfinish_date,unfinish_class_id,unfinish_collect,complete,top_time)
+        values (#{user_id},#{unfinish_content},#{unfinish_date},#{unfinish_class_id},#{unfinish_collect},#{complete},#{top_time});
     </insert>
 
     <delete id="delete" parameterType="Integer">
@@ -18,13 +18,19 @@
     <update id="update" parameterType="Unfinish" >
         update notepad.unfinish
         set unfinish_content = #{unfinish_content},unfinish_date = #{unfinish_date},unfinish_class_id = #{unfinish_class_id},unfinish_collect = #{unfinish_collect }
-        where unfinish_id = #{unfinish_id };
+        where unfinish_id = #{unfinish_id};
+    </update>
+
+    <update id="update_id" parameterType="Integer">
+        update unfinish
+        set unfinish_class_id = #{unfinish_class_id}
+        where unfinish_id = #{id};
     </update>
 
     <select id="find" parameterType="Integer" resultType="Unfinish">
         select *
         from notepad.unfinish
-        where unfinish_id = #{unfinish_id };
+        where unfinish_id = #{unfinish_id};
     </select>
 
 

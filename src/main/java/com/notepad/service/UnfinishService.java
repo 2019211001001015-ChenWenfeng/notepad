@@ -14,5 +14,6 @@ public interface UnfinishService {
     void add(Unfinish unfinish);
     void delete(int unfinish_id);
     void update(Unfinish unfinish);
+    void update_id(int id,int unfinish_class_id);
     Unfinish find(int unfinish_id);
 }

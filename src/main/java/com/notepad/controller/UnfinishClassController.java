@@ -4,13 +4,14 @@ import com.notepad.pojo.Json;
 import com.notepad.pojo.UnfinishClass;
 import com.notepad.service.UnfinishClassService;
 import com.notepad.utils.JsonData;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Api(tags={"待办分类的接口"})
 @RestController
 @RequestMapping("/unfinishClass")
 public class UnfinishClassController {

@@ -34,14 +34,21 @@ public class UnfinishController {
     private UnfinishClassService unfinishClassService;
 
 //  添加待办
-    @GetMapping("/add")
+    @GetMapping("/add/{unfinish}")
     @ApiOperation(value = "添加待办")
-    public Unfinish add()
+    @ApiImplicitParam(name = "unfinish",value = "待办",dataType = "Unfinish",required = true)
+    public Json<Unfinish> add(@PathVariable Unfinish unfinish)
     {
         int complete = 0;
-        Unfinish unfinish = new Unfinish("想大吃一顿",new Date(),1,3,complete);
-        unfinishService.add(unfinish);
-        return unfinish;
+        if(unfinish != null)
+        {
+            unfinish.setComplete(complete);
+            unfinishService.add(unfinish);
+            return new JsonData().success(unfinish);
+
+        }else{
+            return new JsonData().fail();
+        }
 
     }
 
@@ -68,7 +75,7 @@ public class UnfinishController {
             return new JsonData().success(unfinish);
         }
         else {
-            return new JsonData().fail(unfinish);
+            return new JsonData().fail();
         }
 
 
@@ -89,9 +96,10 @@ public class UnfinishController {
         if(unfinish != null)
         {
             UnfinishClass unfinishClass = unfinishClassService.find_class(clas);
-            System.out.println(unfinishClass.getUnfinish_class_id());
-            unfinish.setUnfinish_class_id(unfinishClass.getUnfinish_class_id());
+            unfinishService.update_id(id,unfinishClass.getUnfinish_class_id());
             unfinish = unfinishService.find(id);
+
+
             return new JsonData().success(unfinish);
         }else{
             return new JsonData().fail(unfinish);
