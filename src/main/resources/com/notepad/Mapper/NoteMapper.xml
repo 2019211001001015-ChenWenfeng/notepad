@@ -5,10 +5,13 @@
 <mapper namespace="com.notepad.mapper.NoteMapper">
 
     <select id="findAll" parameterType="String" resultType="Note">
-        select * from notepad.note where user_id = #{user_id}
+        select * from notepad.note
+        where user_id = #{user_id} and delete_time is null
+        order by top_time desc,note_date desc;
+
     </select>
     <select id="findAllByAll" resultType="Note">
-        select * from notepad.note
+        select * from notepad.note;
     </select>
 
     <insert id="add" parameterType="Note">
@@ -23,7 +26,13 @@
     <update id="update" parameterType="Note">
         update notepad.note
         set note_title = #{note_title},note_pic = #{note_pic},note_content = #{note_content},note_date = #{note_date},note_class_id= #{note_class_id},top_time=#{top_time},note_collect=#{note_collect},delete_time=#{delete_time}
-        where note_id = #{note_id}
+        where note_id = #{note_id};
+    </update>
+
+    <update id="update_id" parameterType="Integer">
+        update note
+        set note_class_id = #{note_class_id}
+        where note_id = #{id};
     </update>
 
     <select id="find" parameterType="Integer" resultType="Note">

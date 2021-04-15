@@ -41,6 +41,11 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
+    public void update_id(int id, int note_class_id) {
+        noteMapper.update_id(id,note_class_id);
+    }
+
+    @Override
     public Note find(int note_id) {
         return noteMapper.find(note_id);
     }

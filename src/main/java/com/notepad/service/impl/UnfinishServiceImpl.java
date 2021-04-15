@@ -18,10 +18,10 @@ public class UnfinishServiceImpl implements UnfinishService {
     @Autowired
     private UnfinishMapper unfinishMapper;
     @Override
-    public List<Unfinish> findAll() {
+    public List<Unfinish> findAll(String user_id) {
 
 
-        return  unfinishMapper.findAll();
+        return  unfinishMapper.findAll(user_id);
     }
 
 

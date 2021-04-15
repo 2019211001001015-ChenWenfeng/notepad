@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -48,5 +49,10 @@ public class UnfinishClassServiceImpl implements UnfinishClassService {
     @Override
     public UnfinishClass find_class(String unfinish_class_name) {
         return unfinishClassMapper.find_class(unfinish_class_name);
+    }
+
+    @Override
+    public List<Map<String,Object>> find_name() {
+        return unfinishClassMapper.find_name();
     }
 }

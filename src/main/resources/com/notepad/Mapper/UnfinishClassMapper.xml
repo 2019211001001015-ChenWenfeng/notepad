@@ -34,4 +34,10 @@
         where unfinish_class_name = #{unfinish_class_name};
     </select>
 
+    <select id="find_name" resultType="java.util.Map">
+
+        select unfinish_class_name
+        from unfinish_class;
+    </select>
+
 </mapper>

@@ -5,12 +5,12 @@
 <mapper namespace="com.notepad.mapper.NoteClassMapper">
 
     <select id="findAll" resultType="NoteClass">
-        select * from notepad.note_class
+        select * from notepad.note_class;
     </select>
 
-    <insert id="add" parameterType="NoteClass">
+    <insert id="add" parameterType="String">
         insert into notepad.note_class(note_class_name)
-        values (#{note_class_name})
+        values (#{note_class_name});
     </insert>
 
     <delete id="delete" parameterType="Integer">
@@ -27,6 +27,17 @@
         select *
         from notepad.note_class
         where note_class_id = #{note_class_id};
+    </select>
+
+    <select id="find_name" resultType="java.util.Map">
+        select note_class_name
+        from note_class;
+    </select>
+
+    <select id="find_class" parameterType="String" resultType="NoteClass">
+        select *
+        from note_class
+        where note_class_name = #{note_class_name};
     </select>
 
 </mapper>

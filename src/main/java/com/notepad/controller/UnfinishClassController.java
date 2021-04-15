@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
 @Api(tags={"待办分类的接口"})
 @RestController
 @RequestMapping("/unfinishClass")
@@ -25,7 +27,17 @@ public class UnfinishClassController {
     @GetMapping("/addCla/{clas}")
     public Json addCla(@PathVariable String clas)
     {
-        if(clas!= null)
+        int k = 0;
+        List<Map<String,Object>> maps = unfinishClassService.find_name();
+        for (Map map: maps) {
+
+            if(map.containsValue(clas))
+            {
+                k = 1;
+                break;
+            }
+        }
+        if( k == 0)
         {
             unfinishClassService.add(clas);
             return new JsonData().success();
@@ -40,12 +52,20 @@ public class UnfinishClassController {
 
 
 //    查询出所有待办分类信息
+    @ApiOperation(value = "查询出所有待办分类")
     @GetMapping("/findAllCla")
 
-    public List<UnfinishClass> findAllCla()
+    public Json<UnfinishClass> findAllCla()
     {
         List<UnfinishClass> unfinishClasses = unfinishClassService.findAll();
-        return unfinishClasses;
+        if(unfinishClasses != null)
+        {
+            return new JsonData().success(unfinishClasses);
+        }else
+        {
+            return new JsonData().fail();
+        }
+
     }
 
 

@@ -53,15 +53,24 @@ public class UnfinishController {
     }
 
 //    查询出所有的待办
-    @GetMapping("/findAll")
+    @GetMapping("/findAll/{user_id}")
     @ApiOperation(value = "查询出所有待办")
-    public List<Unfinish> findAll()
+    @ApiImplicitParam(name="user_id",value = "用户的id",dataType = "string",paramType = "path",required = true)
+    public Json<Unfinish> findAll(@PathVariable String user_id)
     {
-        List<Unfinish> unfinishList = unfinishService.findAll();
+        if(user_id != null)
+        {
+            List<Unfinish> unfinishList = unfinishService.findAll(user_id);
+            return new JsonData().success(unfinishList);
+
+        }
+        else{
+            return new JsonData().fail();
+        }
 
 
 
-        return unfinishList;
+
     }
 //  查询出单个待办
     @GetMapping("/find/{id}")
@@ -110,23 +119,5 @@ public class UnfinishController {
 
     }
 
-    /**
-     *  $.ajax({
-     *               url:"http://112.74.175.68:8090/diary/" + id , // 请求路径
-     *               type:"POST" , //请求方式
-     *               //data: "username=jack&age=23",//请求参数
-     *               data:{"username":"jack","age":23},
-     *               success:function (data) {
-     *               data.code
-     *                   alert(data);
-     *               },//响应成功后的回调函数
-     *               error:function () {
-     *                   alert("出错啦...")
-     *               },//表示如果请求响应出现错误，会执行的回调函数
-     *
-     *               dataType:"text"//设置接受到的响应数据的格式
-     *           });
-
-     */
 
 }
