@@ -7,10 +7,13 @@
         where user_id = #{user_id}
         order by top_time  desc,unfinish_date desc;
     </select>
+    <select id="findAllByAll" resultType="Unfinish">
+        select * from notepad.unfinish
+    </select>
 
     <insert id="add" parameterType="Unfinish">
-        insert into notepad.unfinish(user_id,unfinish_content,unfinish_date,unfinish_class_id,unfinish_collect,complete,top_time)
-        values (#{user_id},#{unfinish_content},#{unfinish_date},#{unfinish_class_id},#{unfinish_collect},#{complete},#{top_time});
+        insert into notepad.unfinish(user_id,unfinish_content,unfinish_date,unfinish_class_id,unfinish_collect,complete,top_time,delete_time)
+        values (#{user_id},#{unfinish_content},#{unfinish_date},#{unfinish_class_id},#{unfinish_collect},#{complete},#{top_time},#{delete_time});
     </insert>
 
     <delete id="delete" parameterType="Integer">
@@ -19,12 +22,12 @@
 
     <update id="update" parameterType="Unfinish" >
         update notepad.unfinish
-        set unfinish_content = #{unfinish_content},unfinish_date = #{unfinish_date},unfinish_class_id = #{unfinish_class_id},unfinish_collect = #{unfinish_collect }
+        set unfinish_content = #{unfinish_content},unfinish_date = #{unfinish_date},unfinish_class_id = #{unfinish_class_id},unfinish_collect = #{unfinish_collect},complete = #{complete},top_time = #{top_time},delete_time = #{delete_time}
         where unfinish_id = #{unfinish_id};
     </update>
 
     <update id="update_id" parameterType="Integer">
-        update unfinish
+        update notepad.unfinish
         set unfinish_class_id = #{unfinish_class_id}
         where unfinish_id = #{id};
     </update>

@@ -7,8 +7,10 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface UnfinishMapper {
-//查询出所有待办
+    //通过用户查询用户所有待办
     List<Unfinish> findAll(String user_id);
+    //查出全部的待办信息
+    List<Unfinish> findAllByAll();
 
 
     void add(Unfinish unfinish);

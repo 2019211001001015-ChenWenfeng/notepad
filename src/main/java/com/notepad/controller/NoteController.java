@@ -25,39 +25,19 @@ public class NoteController {
     @Autowired
     private NoteClassService noteClassService;
 
-    @ApiOperation("置顶功能的设置")
+    @ApiOperation("笔记置顶功能的设置")
     @PostMapping("/setTop/{note_id}")
     @ApiImplicitParam(name = "note_id",value = "笔记序号",dataType = "int",paramType = "path",required = true)
-    public void setTop(@PathVariable int note_id,Model model){
-//        System.out.println(note_id);
-        Note note = noteService.find(note_id);
-        if (note.getTop_time()!=null){
-            note.setTop_time(null);
-        }else {
-            note.setTop_time(new Date());
-        }
-        noteService.update(note);
-//        List<Note> noteList = noteService.findAll("1010");
-//        System.out.println("置顶时间"+note.getTop_time());
-//        return noteList.toString();//到时候在修改
+    public void noteSetTop(@PathVariable int note_id,Model model){
+        noteService.noteSetTop(note_id);
     }
 
 
-    @ApiOperation("删除功能")
+    @ApiOperation("笔记删除到回收站功能")
     @PostMapping("/delete/{note_id}")
     @ApiImplicitParam(name = "note_id",value = "笔记序号",dataType = "int",paramType = "path",required = true)
-    public String delete(@PathVariable int note_id){
-        System.out.println(note_id);
-        Note note = noteService.find(note_id);
-        if (note.getDelete_time()!=null){
-            note.setDelete_time(null);
-        }else {
-            note.setDelete_time(new Date());
-        }
-        noteService.update(note);
-        List<Note> noteList = noteService.findAll("1010");
-        System.out.println("删除时间"+note.getDelete_time());
-        return noteList.toString();//到时候在修改
+    public void deleteToRecover(@PathVariable int note_id){
+        noteService.deleteToRecover(note_id);
     }
 
 

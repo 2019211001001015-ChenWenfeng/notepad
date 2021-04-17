@@ -14,6 +14,13 @@
         select * from notepad.note;
     </select>
 
+    <select id="findAllByThing" resultType="Note">
+        select * from notepad.note
+        where user_id = #{user_id} and delete_time is null
+        and note_title like '%#{thing}%' or note_content like '%#{thing}%' or note_date like '%#{thing}%'
+        order by top_time desc,note_date desc;
+    </select>
+
     <insert id="add" parameterType="Note">
         insert into notepad.note(user_id, note_title, note_pic, note_content, note_date, note_class_id, top_time, note_collect, delete_time)
         values (#{user_id},#{note_title},#{note_pic},#{note_content},#{note_date},#{note_class_id},#{top_time},#{note_collect},#{delete_time})

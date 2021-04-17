@@ -15,11 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -113,10 +109,34 @@ public class UnfinishController {
         }else{
             return new JsonData().fail(unfinish);
         }
+    }
+
+    @ApiOperation("待办置顶功能的设置")
+    @PostMapping("/setTop/{unfinish_id}")
+    @ApiImplicitParam(name = "unfinish_id",value = "待办序号",dataType = "int",paramType = "path",required = true)
+    public String noteSetTop(@PathVariable int unfinish_id,Model model){
+        unfinishService.unfinishSetTop(unfinish_id);
+        Unfinish unfinish = unfinishService.find(unfinish_id);
+        return unfinish.toString();//到时候在修改
+    }
 
 
-
-
+    @ApiOperation("待办删除到回收站功能")
+    @PostMapping("/delete/{unfinish_id}")
+    @ApiImplicitParam(name = "unfinish_id",value = "待办序号",dataType = "int",paramType = "path",required = true)
+    public String deleteToRecover(@PathVariable int unfinish_id){
+        unfinishService.deleteToRecover(unfinish_id);
+        Unfinish unfinish = unfinishService.find(unfinish_id);
+        return unfinish.toString();//到时候在修改
+    }
+    @ApiOperation("待办完成功能")
+    @PostMapping("/complete/{unfinish_id}")
+    @ApiImplicitParam(name = "unfinish_id",value = "待办序号",dataType = "int",paramType = "path",required = true)
+    public String complete(@PathVariable int unfinish_id){
+        unfinishService.complete(unfinish_id);
+        Unfinish unfinish = unfinishService.find(unfinish_id);
+        return unfinish.toString();//到时候在修改
+        //        System.out.println("置顶时间"+unfinish.getComplete());
     }
 
 
