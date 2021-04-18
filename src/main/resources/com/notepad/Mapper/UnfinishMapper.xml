@@ -4,11 +4,18 @@
 
     <select id="findAll" parameterType="string" resultType="Unfinish">
         select * from notepad.unfinish
-        where user_id = #{user_id}
+        where user_id = #{user_id} and delete_time is null
         order by top_time  desc,unfinish_date desc;
     </select>
     <select id="findAllByAll" resultType="Unfinish">
         select * from notepad.unfinish
+    </select>
+
+    <select id="findAllByThing" resultType="Unfinish">
+        select * from notepad.unfinish
+        where user_id = #{user_id} and delete_time is null
+        and unfinish_content like concat('%',#{thing},'%') or unfinish_date like concat('%',#{thing},'%')
+        order by top_time  desc,unfinish_date desc;
     </select>
 
     <insert id="add" parameterType="Unfinish">

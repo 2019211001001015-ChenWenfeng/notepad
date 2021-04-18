@@ -129,6 +129,8 @@ public class UnfinishController {
         Unfinish unfinish = unfinishService.find(unfinish_id);
         return unfinish.toString();//到时候在修改
     }
+
+
     @ApiOperation("待办完成功能")
     @PostMapping("/complete/{unfinish_id}")
     @ApiImplicitParam(name = "unfinish_id",value = "待办序号",dataType = "int",paramType = "path",required = true)
@@ -139,5 +141,15 @@ public class UnfinishController {
         //        System.out.println("置顶时间"+unfinish.getComplete());
     }
 
+
+    @ApiOperation("待办搜索功能")
+    @PostMapping("/search/{user_id}/{thing}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "user_id",value = "用户序号",dataType = "string",paramType = "path",required = true),
+            @ApiImplicitParam(name = "thing",value = "搜索内容",dataType = "string",paramType = "path",required = true)
+    })
+    public List<Unfinish> search(@PathVariable String user_id , @PathVariable String thing){
+        return unfinishService.search(user_id,thing);
+    }
 
 }

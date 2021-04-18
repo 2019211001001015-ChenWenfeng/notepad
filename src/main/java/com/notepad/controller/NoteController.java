@@ -40,6 +40,18 @@ public class NoteController {
         noteService.deleteToRecover(note_id);
     }
 
+    @ApiOperation("笔记搜索功能")
+    @PostMapping("/search/{user_id}/{thing}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "user_id",value = "用户序号",dataType = "string",paramType = "path",required = true),
+            @ApiImplicitParam(name = "thing",value = "搜索内容",dataType = "string",paramType = "path",required = true)
+    })
+    public List<Note> search(@PathVariable String user_id, @PathVariable String thing){
+        List<Note> noteList = noteService.search(user_id, thing);
+        System.out.println(noteList);
+        return noteList;
+    }
+
 
 
 
@@ -58,10 +70,6 @@ public class NoteController {
         else{
             return new JsonData().fail();
         }
-
-
-
-
     }
 
     //  查询出单个笔记
@@ -78,8 +86,6 @@ public class NoteController {
         else {
             return new JsonData().fail();
         }
-
-
     }
 
 

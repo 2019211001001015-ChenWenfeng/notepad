@@ -12,6 +12,9 @@ public interface UnfinishMapper {
     //查出全部的待办信息
     List<Unfinish> findAllByAll();
 
+    //
+    List<Unfinish> findAllByThing(@Param("user_id") String user_id,@Param("thing") String thing);
+
 
     void add(Unfinish unfinish);
     void delete(int unfinish_id);

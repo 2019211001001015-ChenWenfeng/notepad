@@ -37,7 +37,6 @@ public class UnfinishServiceImpl implements UnfinishService {
     @Override
     public void delete(int unfinish_id) {
         unfinishMapper.delete(unfinish_id);
-
     }
 
     @Override
@@ -73,7 +72,7 @@ public class UnfinishServiceImpl implements UnfinishService {
     //待办置顶功能
     @Override
     public void unfinishSetTop(int unfinish_id) {
-        //        System.out.println(unfinish_id);
+//        System.out.println(unfinish_id);
 //        Object user = model.getAttribute("user");
 //        System.out.println(user);
         //找出要置顶笔记信息
@@ -109,6 +108,12 @@ public class UnfinishServiceImpl implements UnfinishService {
 //        System.out.println("删除时间"+unfinish.getDelete_time());
 //        return unfinishList.toString();//到时候在修改
     }
+
+    @Override
+    public List<Unfinish> search(String user_id, String thing) {
+        return unfinishMapper.findAllByThing(user_id, thing);
+    }
+
 
     @Override
     public void update_id(int id,int unfinish_class_id) {

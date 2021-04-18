@@ -31,12 +31,12 @@
 
     <select id="find_name" resultType="java.util.Map">
         select note_class_name
-        from note_class;
+        from notepad.note_class;
     </select>
 
     <select id="find_class" parameterType="String" resultType="NoteClass">
         select *
-        from note_class
+        from notepad.note_class
         where note_class_name = #{note_class_name};
     </select>
 

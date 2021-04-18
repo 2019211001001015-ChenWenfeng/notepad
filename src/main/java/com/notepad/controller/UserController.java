@@ -5,14 +5,12 @@ import com.notepad.pojo.User;
 import com.notepad.service.UserService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
-import javax.servlet.http.HttpSession;
 
+
+@Api(tags={"用户的接口"})
 @RestController
 @RequestMapping("/user")
 public class UserController {

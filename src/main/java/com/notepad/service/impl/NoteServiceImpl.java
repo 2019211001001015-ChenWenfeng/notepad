@@ -4,6 +4,7 @@ import com.notepad.mapper.NoteMapper;
 import com.notepad.pojo.Note;
 import com.notepad.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -89,6 +90,12 @@ public class NoteServiceImpl implements NoteService {
 //        List<Note> noteList = noteService.findAll("1010");
 //        System.out.println("删除时间"+note.getDelete_time());
 //        return noteList.toString();//到时候在修改
+    }
+
+    @Override
+    public List<Note> search(String user_id, String thing) {
+        return noteMapper.findAllByThing(user_id, thing);
+//        System.out.println(noteList);
     }
 
 

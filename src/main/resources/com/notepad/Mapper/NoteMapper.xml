@@ -17,7 +17,7 @@
     <select id="findAllByThing" resultType="Note">
         select * from notepad.note
         where user_id = #{user_id} and delete_time is null
-        and note_title like '%#{thing}%' or note_content like '%#{thing}%' or note_date like '%#{thing}%'
+        and note_title like concat('%',#{thing},'%') or note_content like concat('%',#{thing},'%') or note_date like concat('%',#{thing},'%')
         order by top_time desc,note_date desc;
     </select>
 
@@ -37,7 +37,7 @@
     </update>
 
     <update id="update_id" parameterType="Integer">
-        update note
+        update notepad.note
         set note_class_id = #{note_class_id}
         where note_id = #{id};
     </update>

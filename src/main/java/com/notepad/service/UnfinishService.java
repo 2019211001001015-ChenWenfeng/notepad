@@ -24,6 +24,8 @@ public interface UnfinishService {
     void unfinishSetTop(@Param("unfinish_id")int unfinish_id);
     //删除进回收站
     void deleteToRecover(@Param("unfinish_id")int unfinish_id);
+    //搜索功能
+    List<Unfinish> search(@Param("user_id") String user_id,@Param("thing") String thing);
 
     //    待办进行分类，更改待办的unfinish_class_id
     void update_id(int id,int unfinish_class_id);
