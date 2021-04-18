@@ -8,8 +8,7 @@ import java.util.List;
 public interface UserMapper {
     List<User> findAll();
     void add(User user);
-    void delete(int user_id);
+    void delete(String user_id);
     void update(User user);
-    User find(int user_id);
-    User login(@Param("username") String username, @Param("password") String password);
+    User find(String user_id);
 }

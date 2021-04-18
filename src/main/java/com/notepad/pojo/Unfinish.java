@@ -51,5 +51,7 @@ public class Unfinish {
 
     @ApiModelProperty("置顶时间")
     private Date top_time;
+    @ApiModelProperty("删除时间")
+    private Date delete_time;
 
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(int user_id) {
+    public void delete(String user_id) {
         userMapper.delete(user_id);
     }
 
@@ -39,7 +40,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User find(int user_id) {
+    public User find(String user_id) {
         return userMapper.find(user_id);
+    }
+
+    @Override
+    public boolean login(User user) {
+        User user1 = userMapper.find(user.getUser_id());
+        if (user1 ==null){
+            userMapper.add(user);
+            return true;
+        }else {
+            if (user1.getUsername().equals(user.getUsername())&&user1.getHead_portrait().equals(user.getHead_portrait())){
+                System.out.println("登录成功！！！");
+                return true;
+            }else {
+                System.out.println("用户名密码错误！！");
+                return false;
+            }
+        }
     }
 }
