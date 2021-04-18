@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional  // 根据你的配置，设置是否自动开启事务
@@ -53,5 +54,10 @@ public class UnfinishServiceImpl implements UnfinishService {
     public Unfinish find(int unfinish_id) {
 
         return unfinishMapper.find(unfinish_id);
+    }
+
+    @Override
+    public Map<String, Object> find_collect(int unfinish_id) {
+       return unfinishMapper.find_collect(unfinish_id);
     }
 }

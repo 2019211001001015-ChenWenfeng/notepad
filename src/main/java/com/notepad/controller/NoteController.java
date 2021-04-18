@@ -14,6 +14,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import static com.notepad.utils.JsonData.fail;
+import static com.notepad.utils.JsonData.success;
+
 @RestController
 @RequestMapping("/note")
 @Api(tags={"笔记的接口"})
@@ -72,11 +75,11 @@ public class NoteController {
         if(user_id != null)
         {
             List<Note> notes = noteService.findAll(user_id);
-            return new JsonData().success(notes);
+            return success(notes);
 
         }
         else{
-            return new JsonData().fail();
+            return fail();
         }
 
 
@@ -87,16 +90,16 @@ public class NoteController {
     //  查询出单个笔记
     @GetMapping("/find/{id}")
     @ApiOperation(value = "查询出单个笔记")
-    @ApiImplicitParam(name = "id",value = "待办的id",dataType = "int",paramType = "path",required = true)
+    @ApiImplicitParam(name = "id",value = "笔记的id",dataType = "int",paramType = "path",required = true)
     public Json<Unfinish> find(@PathVariable int id)
     {
         Note note = noteService.find(id);
         if (note != null)
         {
-            return new JsonData().success(note);
+            return success(note);
         }
         else {
-            return new JsonData().fail();
+            return fail();
         }
 
 
@@ -122,9 +125,9 @@ public class NoteController {
             note = noteService.find(id);
 
 
-            return new JsonData().success(note);
+            return success(note);
         }else{
-            return new JsonData().fail(note);
+            return fail(note);
         }
 
 

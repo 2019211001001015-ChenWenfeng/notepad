@@ -11,4 +11,6 @@ public class Json<T> {
     private  Integer code;
     private String message;
     private T data;
+
+
 }

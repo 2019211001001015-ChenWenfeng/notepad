@@ -17,6 +17,8 @@ public class NoteClass {//属性值为private不能加swagger属性注解
         this.note_class_name = note_class_name;
     }
 
+    @ApiModelProperty("用户的id")
+    private int user_id;
 
     @ApiModelProperty(value = "笔记分类id")
     private int note_class_id;

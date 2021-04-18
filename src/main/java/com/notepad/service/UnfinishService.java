@@ -4,6 +4,7 @@ import com.notepad.pojo.Note;
 import com.notepad.pojo.Unfinish;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UnfinishService {
 
@@ -20,4 +21,7 @@ public interface UnfinishService {
     void update_id(int id,int unfinish_class_id);
 
     Unfinish find(int unfinish_id);
+
+    //    查询出待办的收藏是0还是1
+    Map<String,Object> find_collect(int unfinish_id);
 }

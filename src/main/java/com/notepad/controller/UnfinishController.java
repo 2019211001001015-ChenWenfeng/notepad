@@ -1,28 +1,20 @@
 package com.notepad.controller;
-
-import com.notepad.mapper.UnfinishMapper;
 import com.notepad.pojo.Json;
-import com.notepad.pojo.Note;
 import com.notepad.pojo.Unfinish;
 import com.notepad.pojo.UnfinishClass;
 import com.notepad.service.UnfinishClassService;
 import com.notepad.service.UnfinishService;
-import com.notepad.utils.JsonData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
-import java.util.List;
+import static com.notepad.utils.JsonData.fail;
+import static com.notepad.utils.JsonData.success;
 
 @Api(tags={"待办的接口"})
 @RestController
@@ -44,10 +36,10 @@ public class UnfinishController {
         {
             unfinish.setComplete(complete);
             unfinishService.add(unfinish);
-            return new JsonData().success(unfinish);
+            return success(unfinish);
 
         }else{
-            return new JsonData().fail();
+            return fail();
         }
 
     }
@@ -60,12 +52,12 @@ public class UnfinishController {
     {
         if(user_id != null)
         {
-            List<Unfinish> unfinishList = unfinishService.findAll(user_id);
-            return new JsonData().success(unfinishList);
+
+            return success(unfinishService.findAll(user_id));
 
         }
         else{
-            return new JsonData().fail();
+            return fail();
         }
 
 
@@ -81,10 +73,10 @@ public class UnfinishController {
         Unfinish unfinish = unfinishService.find(id);
         if (unfinish != null)
         {
-            return new JsonData().success(unfinish);
+            return success(unfinish);
         }
         else {
-            return new JsonData().fail();
+            return fail();
         }
 
 
@@ -109,15 +101,34 @@ public class UnfinishController {
             unfinish = unfinishService.find(id);
 
 
-            return new JsonData().success(unfinish);
+            return success(unfinish);
         }else{
-            return new JsonData().fail(unfinish);
+            return fail();
         }
 
 
 
 
     }
+
+
+//    //    新增待办分类
+//    @ApiOperation(value = "待办收藏")
+//    @ApiImplicitParam(name = "id",value = "待办的id",dataType = "int",paramType = "path",required = true)
+//    @GetMapping("/collect/{id}")
+//    public Json<Unfinish> collect(@PathVariable int id)
+//    {
+//
+//          Unfinish unfinish = unfinishService.find(id);
+//          if(unfinish != null)
+//          {
+//
+//          }
+//          else{
+//              return  success();
+//          }
+//
+//    }
 
 
 }

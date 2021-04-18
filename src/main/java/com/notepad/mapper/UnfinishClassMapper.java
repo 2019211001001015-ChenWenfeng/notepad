@@ -9,8 +9,8 @@ import java.util.Map;
 
 public interface UnfinishClassMapper {
 
-    List<UnfinishClass> findAll();
-    void add(String unfininsh_class_name);
+    List<Map<String,Object>> findAll(String user_id);
+    void add(@Param("user_id") String user_id,@Param("unfinish_class_name") String unfinish_class_name);
     void delete(int unfininsh_class_id);
     void update(UnfinishClass unfinishClass);
 
@@ -20,7 +20,6 @@ public interface UnfinishClassMapper {
 //    通过查询待办分类名称，查询待办分类
     UnfinishClass find_class(String unfinish_class_name);
 
-//  查询出所有分类名称
-    List<Map<String,Object>> find_name();
+
 
 }

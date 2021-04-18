@@ -16,6 +16,8 @@ public class UnfinishClass {
     public UnfinishClass(String unfinish_class_name) {
         this.unfinish_class_name = unfinish_class_name;
     }
+    @ApiModelProperty("用户的id")
+    private int user_id;
 
     @ApiModelProperty("待办分类id")
     private int unfinish_class_id;

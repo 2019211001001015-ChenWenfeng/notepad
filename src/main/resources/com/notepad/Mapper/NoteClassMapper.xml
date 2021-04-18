@@ -4,13 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.notepad.mapper.NoteClassMapper">
 
-    <select id="findAll" resultType="NoteClass">
-        select * from notepad.note_class;
+    <select id="findAll" parameterType="String" resultType="java.util.Map">
+        select DISTINCT note_class_name
+        from notepad.note_class left outer join note
+        on note.note_class_id = note_class.note_class_id
+       where note.user_id = #{user_id} or note_class.user_id = #{user_id};
     </select>
 
     <insert id="add" parameterType="String">
-        insert into notepad.note_class(note_class_name)
-        values (#{note_class_name});
+        insert into notepad.note_class(user_id,note_class_name)
+        values (#{user_id},#{note_class_name});
     </insert>
 
     <delete id="delete" parameterType="Integer">
@@ -29,9 +32,10 @@
         where note_class_id = #{note_class_id};
     </select>
 
-    <select id="find_name" resultType="java.util.Map">
+    <select id="find_name" parameterType="String" resultType="java.util.Map">
         select note_class_name
-        from note_class;
+        from note_class,note
+        where note.note_class_id = note_class.note_class_id and user_id = #{user_id};
     </select>
 
     <select id="find_class" parameterType="String" resultType="NoteClass">

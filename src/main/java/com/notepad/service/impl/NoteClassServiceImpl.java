@@ -17,13 +17,13 @@ public class NoteClassServiceImpl implements NoteClassService {
     @Autowired
     private NoteClassMapper noteClassMapper;
     @Override
-    public List<NoteClass> findAll() {
-        return noteClassMapper.findAll();
+    public List<Map<String,Object>> findAll(String user_id) {
+        return noteClassMapper.findAll(user_id);
     }
 
     @Override
-    public void add(String note_class_name) {
-        noteClassMapper.add(note_class_name);
+    public void add(String user_id,String note_class_name) {
+        noteClassMapper.add(user_id,note_class_name);
     }
 
     @Override
@@ -48,8 +48,5 @@ public class NoteClassServiceImpl implements NoteClassService {
     }
 
 
-    @Override
-    public List<Map<String, Object>> find_name() {
-       return noteClassMapper.find_name();
-    }
+
 }

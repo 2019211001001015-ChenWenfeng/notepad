@@ -5,6 +5,7 @@ import com.notepad.pojo.Unfinish;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UnfinishMapper {
 //查询出所有待办
@@ -20,4 +21,7 @@ public interface UnfinishMapper {
 
 
     Unfinish find(int unfinish_id);
+
+//    查询出待办的收藏是0还是1
+    Map<String,Object> find_collect(int unfinish_id);
 }

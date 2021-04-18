@@ -35,6 +35,12 @@
         where unfinish_id = #{unfinish_id};
     </select>
 
+    <select id="find_collect" parameterType="Integer" resultType="java.util.Map">
+        select unfinish_collect
+        from unfinish
+        where unfinish_id = #{unfinish_id};
+    </select>
+
 
 
 </mapper>

@@ -1,13 +1,13 @@
 package com.notepad.utils;
 
 import com.notepad.pojo.Json;
-import org.springframework.beans.factory.annotation.Autowired;
-
-public class JsonData {
 
 
+public  class JsonData<T> {
 
-    public Json success(Object object)
+
+
+    public static Json success(Object object)
     {
 //        设置200为成功
         Json json = new Json();
@@ -19,7 +19,7 @@ public class JsonData {
 
     }
 
-    public Json success()
+    public static Json success()
     {
 //        设置200为成功
         Json json = new Json();
@@ -30,7 +30,7 @@ public class JsonData {
 
     }
 
-    public Json fail(Object object)
+    public  static Json fail(Object object)
     {
 //        设置500为失败
         Json json = new Json();
@@ -41,7 +41,7 @@ public class JsonData {
 
 
     }
-    public Json fail()
+    public static Json fail()
     {
 //        设置500为失败
         Json json = new Json();

@@ -6,12 +6,16 @@ import com.notepad.service.UnfinishClassService;
 import com.notepad.utils.JsonData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+
+import static com.notepad.utils.JsonData.fail;
+import static com.notepad.utils.JsonData.success;
 
 @Api(tags={"待办分类的接口"})
 @RestController
@@ -23,12 +27,16 @@ public class UnfinishClassController {
 
 //    新增待办分类
     @ApiOperation(value = "新增待办分类")
-    @ApiImplicitParam(name = "clas",value = "新增的类型",dataType = "string",paramType = "path",required = true)
-    @GetMapping("/addCla/{clas}")
-    public Json addCla(@PathVariable String clas)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "clas",value = "新增的类型",dataType = "string",paramType = "path",required = true),
+            @ApiImplicitParam(name = "user_id",value = "用户的id",dataType = "string",paramType = "path",required = true)
+    })
+
+    @GetMapping("/addCla/{clas}/{user_id}")
+    public Json addCla(@PathVariable String clas,@PathVariable String user_id)
     {
         int k = 0;
-        List<Map<String,Object>> maps = unfinishClassService.find_name();
+        List<Map<String,Object>> maps = unfinishClassService.findAll(user_id);
         for (Map map: maps) {
 
             if(map.containsValue(clas))
@@ -39,12 +47,12 @@ public class UnfinishClassController {
         }
         if( k == 0)
         {
-            unfinishClassService.add(clas);
-            return new JsonData().success();
+            unfinishClassService.add(user_id,clas);
+            return success();
         }
         else
         {
-            return new JsonData().fail();
+            return fail();
         }
 
 
@@ -53,17 +61,20 @@ public class UnfinishClassController {
 
 //    查询出所有待办分类信息
     @ApiOperation(value = "查询出所有待办分类")
-    @GetMapping("/findAllCla")
+    @ApiImplicitParam(name = "user_id",value = "用户的id",dataType = "string",paramType = "path",required = true)
+    @GetMapping("/findAllCla/{user_id}")
 
-    public Json<UnfinishClass> findAllCla()
+    public Json<UnfinishClass> findAllCla(@PathVariable String user_id)
     {
-        List<UnfinishClass> unfinishClasses = unfinishClassService.findAll();
-        if(unfinishClasses != null)
+        List<Map<String,Object>> unfinishClasses = unfinishClassService.findAll(user_id);
+
+        if(unfinishClasses.isEmpty())
         {
-            return new JsonData().success(unfinishClasses);
+           return fail();
         }else
         {
-            return new JsonData().fail();
+
+            return success(unfinishClasses);
         }
 
     }
