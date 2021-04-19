@@ -18,6 +18,9 @@ public interface UnfinishService {
     void delete(@Param("unfinish_id")int unfinish_id);
     void update(Unfinish unfinish);
 
+    //    修改待办发收藏是0还是1
+    void update_collect(int unfinish_id,int collect);
+
     //完成功能
     void complete(@Param("unfinish_id")int unfinish_id);
 
@@ -34,5 +37,8 @@ public interface UnfinishService {
     Unfinish find(int unfinish_id);
 
     //    查询出待办的收藏是0还是1
-    Map<String,Object> find_collect(int unfinish_id);
+    int find_collect(int unfinish_id);
+
+
+
 }

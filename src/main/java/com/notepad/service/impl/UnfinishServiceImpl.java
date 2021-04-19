@@ -45,6 +45,11 @@ public class UnfinishServiceImpl implements UnfinishService {
         unfinishMapper.update(unfinish);
     }
 
+    @Override
+    public void update_collect(int unfinish_id,int collect) {
+        unfinishMapper.update_collect(unfinish_id,collect);
+    }
+
     //完成功能
     @Override
     public void complete(int unfinish_id) {
@@ -128,7 +133,7 @@ public class UnfinishServiceImpl implements UnfinishService {
     }
 
     @Override
-    public Map<String, Object> find_collect(int unfinish_id) {
+    public int find_collect(int unfinish_id) {
        return unfinishMapper.find_collect(unfinish_id);
     }
 }

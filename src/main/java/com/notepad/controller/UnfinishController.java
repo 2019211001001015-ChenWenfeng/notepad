@@ -18,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static com.notepad.utils.JsonData.fail;
 import static com.notepad.utils.JsonData.success;
@@ -156,21 +158,34 @@ public class UnfinishController {
 
 
 
-//    @ApiOperation(value = "待办收藏")
-//    @ApiImplicitParam(name = "id",value = "待办的id",dataType = "int",paramType = "path",required = true)
-//    @GetMapping("/collect/{id}")
-//    public Json<Unfinish> collect(@PathVariable int id)
-//    {
-//
-//          Unfinish unfinish = unfinishService.find(id);
-//          if(unfinish != null)
-//          {
-//
-//          }
-//          else{
-//              return  success();
-//          }
-//
-//    }
+    @ApiOperation(value = "待办收藏")
+    @ApiImplicitParam(name = "id",value = "待办的id",dataType = "int",paramType = "path",required = true)
+    @GetMapping("/collect/{id}")
+    public Json<Unfinish> collect(@PathVariable int id)
+    {
+
+          Unfinish unfinish = unfinishService.find(id);
+          if(unfinish != null)
+          {
+             int collect = unfinishService.find_collect(id);
+
+             if(collect == 0)
+             {
+                collect = 1;
+                unfinishService.update_collect(id,collect);
+
+             }else{
+                 collect = 0;
+                 unfinishService.update_collect(id,collect);
+             }
+             unfinish = unfinishService.find(id);
+             return success(unfinish);
+          }else{
+              return fail();
+          }
+
+
+
+    }
 
 }

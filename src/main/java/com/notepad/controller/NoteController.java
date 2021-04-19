@@ -121,5 +121,35 @@ public class NoteController {
 
     }
 
+    @ApiOperation(value = "笔记收藏")
+    @ApiImplicitParam(name = "id",value = "笔记的id",dataType = "int",paramType = "path",required = true)
+    @GetMapping("/collect/{id}")
+    public Json<Note> collect(@PathVariable int id)
+    {
+
+       Note note = noteService.find(id);
+        if(note != null)
+        {
+            int collect = noteService.find_collect(id);
+
+            if(collect == 0)
+            {
+                collect = 1;
+                noteService.update_collect(id,collect);
+
+            }else{
+                collect = 0;
+                noteService.update_collect(id,collect);
+            }
+            note = noteService.find(id);
+            return success(note);
+        }else{
+            return fail();
+        }
+
+
+
+    }
+
 
 }
