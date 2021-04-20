@@ -25,4 +25,12 @@ public interface NoteService {
     //    笔记进行分类，更改笔记的unfinish_class_id
     void update_id(@Param("id") int id, @Param("note_class_id") int note_class_id);
     Note find(int note_id);
+
+    //    查询出待办的收藏是0还是1
+    int find_collect(int note_id);
+
+
+    //    修改待办发收藏是0还是1
+    void update_collect( int note_id, int collect);
+
 }

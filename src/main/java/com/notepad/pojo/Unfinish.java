@@ -1,7 +1,6 @@
 package com.notepad.pojo;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -26,6 +25,8 @@ public class Unfinish {
         this.complete = complete;
         this.top_time = top_time;
     }
+
+
 
     @ApiModelProperty("用户id")//给字段增加中文注释
     private String user_id;

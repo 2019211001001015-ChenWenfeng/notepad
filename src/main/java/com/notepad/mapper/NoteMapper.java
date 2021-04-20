@@ -23,4 +23,13 @@ public interface NoteMapper {
 
 
     Note find(int note_id);
+
+    //    查询出待办的收藏是0还是1
+    int find_collect(int note_id);
+
+
+
+    //    修改待办发收藏是0还是1
+    void update_collect(@Param("note_id") int note_id,@Param("collect") int collect);
+
 }

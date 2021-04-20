@@ -47,4 +47,16 @@
         from notepad.note
         where note_id = #{note_id};
     </select>
+
+    <select id="find_collect" parameterType="Integer" resultType="Integer">
+        select note_collect
+        from note
+        where note_id = #{note_id};
+    </select>
+
+    <update id="update_collect" parameterType="Integer">
+        update note
+        set note_collect = #{collect}
+        where note_id = #{note_id};
+    </update>
 </mapper>

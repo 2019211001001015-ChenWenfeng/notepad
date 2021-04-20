@@ -28,6 +28,17 @@ public class NoteServiceImpl implements NoteService {
     public Note find(int note_id) {
         return noteMapper.find(note_id);
     }
+
+    @Override
+    public int find_collect(int note_id) {
+        return noteMapper.find_collect(note_id);
+    }
+
+    @Override
+    public void update_collect(int note_id, int collect) {
+        noteMapper.update_collect(note_id,collect);
+    }
+
     //查询数据库中的所有笔记
     @Override
     public List<Note> findAllByAll() {

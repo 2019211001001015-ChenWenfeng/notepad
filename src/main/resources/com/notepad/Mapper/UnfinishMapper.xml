@@ -45,11 +45,18 @@
         where unfinish_id = #{unfinish_id};
     </select>
 
-    <select id="find_collect" parameterType="Integer" resultType="java.util.Map">
+    <select id="find_collect" parameterType="Integer" resultType="Integer">
         select unfinish_collect
         from unfinish
         where unfinish_id = #{unfinish_id};
     </select>
+
+    <update id="update_collect" parameterType="Integer">
+        update unfinish
+        set unfinish_collect = #{collect}
+        where unfinish_id = #{unfinish_id};
+
+    </update>
 
 
 
