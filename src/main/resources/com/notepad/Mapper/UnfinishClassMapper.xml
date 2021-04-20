@@ -4,7 +4,7 @@
 
     <select id="findAll" parameterType="String" resultType="java.util.Map">
         select DISTINCT unfinish_class_name
-        from unfinish_class left outer join unfinish
+        from notepad.unfinish_class left outer join notepad.unfinish
         on unfinish.unfinish_class_id = unfinish_class.unfinish_class_id
         where unfinish.user_id = #{user_id} or unfinish_class.user_id = #{user_id};
     </select>
@@ -40,7 +40,7 @@
     <select id="find_name" parameterType="String" resultType="java.util.Map">
 
         select unfinish_class_name
-        from unfinish_class,unfinish
+        from notepad.unfinish_class,notepad.unfinish
         where unfinish.unfinish_class_id = unfinish_class.unfinish_class_id and user_id = #{user_id};
     </select>
 

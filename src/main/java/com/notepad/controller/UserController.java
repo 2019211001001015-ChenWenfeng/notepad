@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-
+@CrossOrigin
 @Api(tags={"用户的接口"})
 @RestController
 @RequestMapping("/user")

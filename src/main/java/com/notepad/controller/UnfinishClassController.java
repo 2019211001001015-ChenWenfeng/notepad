@@ -17,6 +17,7 @@ import java.util.Map;
 import static com.notepad.utils.JsonData.fail;
 import static com.notepad.utils.JsonData.success;
 
+@CrossOrigin
 @Api(tags={"待办分类的接口"})
 @RestController
 @RequestMapping("/unfinishClass")
