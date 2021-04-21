@@ -30,10 +30,8 @@ public class UserController {
 
     @GetMapping("/login/{code}")
     @ApiOperation("登录功能")
-    @ApiImplicitParam(name = "code" ,value = "微信的id",dataType = "String" ,paramType = "path",required = true)
-
 //    登录方法
-    public Json<User> login(@PathVariable String code,User user){
+    public Json<User> login(String code,@RequestBody User user){
         String url = "https://api.weixin.qq.com/sns/jscode2session";
         Map<String, String> param = new HashMap<String, String>();
         param.put("appid", "wx2f2c7c617b0ae5f8");

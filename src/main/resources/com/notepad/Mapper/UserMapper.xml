@@ -9,8 +9,8 @@
     </select>
 
     <insert id="add" parameterType="User">
-        insert into notepad.user
-        values (#{user_id},#{user_open_id},#{username},#{head_portrait},#{user_login_time});
+        insert into notepad.user(user_open_id, username, head_portrait, user_login_time)
+        values (#{user_open_id},#{username},#{head_portrait},#{user_login_time});
     </insert>
 
     <delete id="delete" parameterType="Integer">
