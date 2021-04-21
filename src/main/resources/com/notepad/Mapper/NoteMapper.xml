@@ -8,8 +8,8 @@
         select * from notepad.note
         where user_id = #{user_id} and delete_time is null
         order by top_time desc,note_date desc;
-
     </select>
+
     <select id="findAllByAll" resultType="Note">
         select * from notepad.note;
     </select>
@@ -50,12 +50,12 @@
 
     <select id="find_collect" parameterType="Integer" resultType="Integer">
         select note_collect
-        from note
+        from notepad.note
         where note_id = #{note_id};
     </select>
 
     <update id="update_collect" parameterType="Integer">
-        update note
+        update notepad.note
         set note_collect = #{collect}
         where note_id = #{note_id};
     </update>

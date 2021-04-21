@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserService userService;
-
-
     @GetMapping("/login")
     @ApiOperation("登录功能")
     //登录方法
