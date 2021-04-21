@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface NoteMapper {
-    List<Note> findAll(String user_id);
+    List<Note> findAll(int user_id);
 
     List<Note> findAllByAll();
 
@@ -16,7 +16,7 @@ public interface NoteMapper {
 
     void update(Note note);
 
-    List<Note> findAllByThing(@Param("user_id") String user_id,@Param("thing") String thing);
+    List<Note> findAllByThing(@Param("user_id") int user_id,@Param("thing") String thing);
 
     //    笔记进行分类，更改笔记的unfinish_class_id
     void update_id(@Param("id") int id, @Param("note_class_id") int note_class_id);

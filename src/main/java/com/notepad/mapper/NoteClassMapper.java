@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 public interface NoteClassMapper {
-    List<Map<String,Object>>findAll(String user_id);
+    List<Map<String,Object>>findAll(int user_id);
 
 //笔记分类只有名称需要加入，不需要笔记对象
-    void add(@Param("user_id") String user_id,@Param("note_class_name") String note_class_name);
+    void add(@Param("user_id") int user_id,@Param("note_class_name") String note_class_name);
     void delete(int note_class_id);
     void update(NoteClass noteClass);
     NoteClass find(int note_class_id);

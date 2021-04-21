@@ -10,23 +10,29 @@
 
     <insert id="add" parameterType="User">
         insert into notepad.user
-        values (#{user_id},#{username},#{head_portrait})
+        values (#{user_id},#{user_open_id},#{username},#{head_portrait},#{user_login_time});
     </insert>
 
-    <delete id="delete" parameterType="String">
+    <delete id="delete" parameterType="Integer">
         delete from notepad.user where user_id = #{user_id}
     </delete>
 
     <update id="update" parameterType="User">
         update notepad.user
-        set username =#{username},head_portrait =#{head_portrait}
+        set user_open_id = #{user_open_id},username =#{username},head_portrait =#{head_portrait},user_login_time = #{user_login_time}
         where user_id = #{user_id}
     </update>
 
-    <select id="find" parameterType="String" resultType="User">
+    <select id="find" parameterType="Integer" resultType="User">
         select *
         from notepad.user
-        where user_id = #{user_id}
+        where user_id = #{user_id};
+    </select>
+
+    <select id="find_openId" parameterType="String" resultType="User">
+        select *
+        from user
+        where user_open_id = #{openId};
     </select>
 
     <select id="login" resultType="User">
@@ -34,7 +40,7 @@
         from notepad.user
         where username = #{username}
         and user_id = #{user_id}
-        and head_portrait = #{head_portrait}
+        and head_portrait = #{head_portrait};
     </select>
 
 </mapper>

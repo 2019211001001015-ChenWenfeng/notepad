@@ -9,12 +9,12 @@ import java.util.Map;
 
 public interface UnfinishMapper {
     //通过用户查询用户所有待办
-    List<Unfinish> findAll(String user_id);
+    List<Unfinish> findAll(int user_id);
     //查出全部的待办信息
     List<Unfinish> findAllByAll();
 
     //
-    List<Unfinish> findAllByThing(@Param("user_id") String user_id,@Param("thing") String thing);
+    List<Unfinish> findAllByThing(@Param("user_id") int user_id,@Param("thing") String thing);
 
 
     void add(Unfinish unfinish);

@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.notepad.mapper.UnfinishClassMapper">
 
-    <select id="findAll" parameterType="String" resultType="java.util.Map">
+    <select id="findAll" parameterType="Integer" resultType="java.util.Map">
         select DISTINCT unfinish_class_name
         from unfinish_class left outer join unfinish
         on unfinish.unfinish_class_id = unfinish_class.unfinish_class_id
         where unfinish.user_id = #{user_id} or unfinish_class.user_id = #{user_id};
     </select>
 
-    <insert id="add" parameterType="String">
+    <insert id="add">
         insert into notepad.unfinish_class(user_id,unfinish_class_name)
         values (#{user_id},#{unfinish_class_name});
     </insert>
@@ -37,11 +37,6 @@
         where unfinish_class_name = #{unfinish_class_name};
     </select>
 
-    <select id="find_name" parameterType="String" resultType="java.util.Map">
 
-        select unfinish_class_name
-        from unfinish_class,unfinish
-        where unfinish.unfinish_class_id = unfinish_class.unfinish_class_id and user_id = #{user_id};
-    </select>
 
 </mapper>

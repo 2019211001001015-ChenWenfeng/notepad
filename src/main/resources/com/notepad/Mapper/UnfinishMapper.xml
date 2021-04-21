@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.notepad.mapper.UnfinishMapper">
 
-    <select id="findAll" parameterType="string" resultType="Unfinish">
+    <select id="findAll" parameterType="Integer" resultType="Unfinish">
         select * from notepad.unfinish
         where user_id = #{user_id} and delete_time is null
         order by top_time  desc,unfinish_date desc;

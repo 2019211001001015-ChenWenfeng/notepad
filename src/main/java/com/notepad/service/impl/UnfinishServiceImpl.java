@@ -20,7 +20,7 @@ public class UnfinishServiceImpl implements UnfinishService {
     @Autowired
     private UnfinishMapper unfinishMapper;
     @Override
-    public List<Unfinish> findAll(String user_id) {
+    public List<Unfinish> findAll(int user_id) {
 
 
         return  unfinishMapper.findAll(user_id);
@@ -116,7 +116,7 @@ public class UnfinishServiceImpl implements UnfinishService {
     }
 
     @Override
-    public List<Unfinish> search(String user_id, String thing) {
+    public List<Unfinish> search(int user_id, String thing) {
         return unfinishMapper.findAllByThing(user_id, thing);
     }
 
