@@ -29,7 +29,7 @@ public class Unfinish {
 
 
     @ApiModelProperty("用户id")//给字段增加中文注释
-    private String user_id;
+    private int user_id;
 
     @ApiModelProperty("待办id")//给字段增加中文注释
     private int unfinish_id;

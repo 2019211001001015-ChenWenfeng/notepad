@@ -9,8 +9,8 @@ import java.util.Map;
 
 public interface UnfinishClassService {
 
-    List<Map<String,Object>> findAll(String user_id);
-    void add(String user_id,String unfinish_class_name);
+    List<Map<String,Object>> findAll(int user_id);
+    void add(int user_id,String unfinish_class_name);
     void delete(int unfininsh_class_id);
     void update(UnfinishClass unfinishClass);
 

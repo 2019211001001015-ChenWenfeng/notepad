@@ -18,13 +18,13 @@ public class UnfinishClassServiceImpl implements UnfinishClassService {
     private UnfinishClassMapper unfinishClassMapper;
 
     @Override
-    public List<Map<String,Object>> findAll(String user_id) {
+    public List<Map<String,Object>> findAll(int user_id) {
 
         return unfinishClassMapper.findAll(user_id);
     }
 
     @Override
-    public void add(String user_id,String unfininsh_class_name) {
+    public void add(int user_id,String unfininsh_class_name) {
         unfinishClassMapper.add(user_id,unfininsh_class_name);
 
     }

@@ -4,6 +4,7 @@ package com.notepad.controller;
 import com.notepad.pojo.*;
 import com.notepad.service.NoteClassService;
 import com.notepad.service.NoteService;
+import com.notepad.service.UserService;
 import com.notepad.utils.JsonData;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class NoteController {
     @Autowired
     private NoteClassService noteClassService;
 
+    @Autowired
+    private UserService userService;
+
     @ApiOperation("笔记置顶功能的设置")
     @PostMapping("/setTop/{note_id}")
     @ApiImplicitParam(name = "note_id",value = "笔记序号",dataType = "int",paramType = "path",required = true)
@@ -48,10 +52,10 @@ public class NoteController {
     @ApiOperation("笔记搜索功能")
     @PostMapping("/search/{user_id}/{thing}")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "user_id",value = "用户序号",dataType = "string",paramType = "path",required = true),
+            @ApiImplicitParam(name = "user_id",value = "用户序号",dataType = "int",paramType = "path",required = true),
             @ApiImplicitParam(name = "thing",value = "搜索内容",dataType = "string",paramType = "path",required = true)
     })
-    public List<Note> search(@PathVariable String user_id, @PathVariable String thing){
+    public List<Note> search(@PathVariable int user_id, @PathVariable String thing){
         List<Note> noteList = noteService.search(user_id, thing);
         System.out.println(noteList);
         return noteList;
@@ -63,10 +67,12 @@ public class NoteController {
     //    查询出所有的笔记
     @GetMapping("/findAll/{user_id}")
     @ApiOperation(value = "查询出所有笔记")
-    @ApiImplicitParam(name="user_id",value = "用户的id",dataType = "string",paramType = "path",required = true)
-    public Json<Unfinish> findAll(@PathVariable String user_id)
+    @ApiImplicitParam(name="user_id",value = "用户的id",dataType = "int",paramType = "path",required = true)
+    public Json<Unfinish> findAll(@PathVariable int user_id)
     {
-        if(user_id != null)
+
+
+        if(userService.find(user_id) != null)
         {
             List<Note> notes = noteService.findAll(user_id);
             return success(notes);

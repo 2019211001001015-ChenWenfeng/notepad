@@ -37,11 +37,5 @@
         where unfinish_class_name = #{unfinish_class_name};
     </select>
 
-    <select id="find_name" parameterType="String" resultType="java.util.Map">
-
-        select unfinish_class_name
-        from notepad.unfinish_class,notepad.unfinish
-        where unfinish.unfinish_class_id = unfinish_class.unfinish_class_id and user_id = #{user_id};
-    </select>
 
 </mapper>

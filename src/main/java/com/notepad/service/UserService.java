@@ -7,9 +7,12 @@ import java.util.List;
 
 public interface UserService {
     List<User> findAll();
-    void add(User user);
-    void delete(String user_id);
+    Boolean add(User user);
+    void delete(int user_id);
     void update(User user);
-    User find(String user_id);
+    User find(int user_id);
     boolean login(User user);
+
+    //    通过openid查询用户
+    User find_openId(String openId);
 }

@@ -30,11 +30,11 @@ public class UnfinishClassController {
     @ApiOperation(value = "新增待办分类")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clas",value = "新增的类型",dataType = "string",paramType = "path",required = true),
-            @ApiImplicitParam(name = "user_id",value = "用户的id",dataType = "string",paramType = "path",required = true)
+            @ApiImplicitParam(name = "user_id",value = "用户的id",dataType = "int",paramType = "path",required = true)
     })
 
     @GetMapping("/addCla/{clas}/{user_id}")
-    public Json addCla(@PathVariable String clas,@PathVariable String user_id)
+    public Json addCla(@PathVariable String clas,@PathVariable int user_id)
     {
         int k = 0;
         List<Map<String,Object>> maps = unfinishClassService.findAll(user_id);
@@ -62,10 +62,10 @@ public class UnfinishClassController {
 
 //    查询出所有待办分类信息
     @ApiOperation(value = "查询出所有待办分类")
-    @ApiImplicitParam(name = "user_id",value = "用户的id",dataType = "string",paramType = "path",required = true)
+    @ApiImplicitParam(name = "user_id",value = "用户的id",dataType = "int",paramType = "path",required = true)
     @GetMapping("/findAllCla/{user_id}")
 
-    public Json<UnfinishClass> findAllCla(@PathVariable String user_id)
+    public Json<UnfinishClass> findAllCla(@PathVariable int user_id)
     {
         List<Map<String,Object>> unfinishClasses = unfinishClassService.findAll(user_id);
 

@@ -25,12 +25,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void add(User user) {
-        userMapper.add(user);
+    public Boolean add(User user) {
+        return userMapper.add(user);
     }
 
     @Override
-    public void delete(String user_id) {
+    public void delete(int user_id) {
         userMapper.delete(user_id);
     }
 
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User find(String user_id) {
+    public User find(int user_id) {
         return userMapper.find(user_id);
     }
 
@@ -59,5 +59,10 @@ public class UserServiceImpl implements UserService {
                 return false;
             }
         }
+    }
+
+    @Override
+    public User find_openId(String openId) {
+        return userMapper.find_openId(openId);
     }
 }

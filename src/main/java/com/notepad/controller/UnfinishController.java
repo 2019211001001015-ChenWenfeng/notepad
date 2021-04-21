@@ -1,12 +1,10 @@
 package com.notepad.controller;
 
 import com.notepad.mapper.UnfinishMapper;
-import com.notepad.pojo.Json;
-import com.notepad.pojo.Note;
-import com.notepad.pojo.Unfinish;
-import com.notepad.pojo.UnfinishClass;
+import com.notepad.pojo.*;
 import com.notepad.service.UnfinishClassService;
 import com.notepad.service.UnfinishService;
+import com.notepad.service.UserService;
 import com.notepad.utils.JsonData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -34,6 +32,9 @@ public class UnfinishController {
     @Autowired
     private UnfinishClassService unfinishClassService;
 
+    @Autowired
+    private UserService userService;
+
 //  添加待办
     @GetMapping("/add/{unfinish}")
     @ApiOperation(value = "添加待办")
@@ -56,10 +57,13 @@ public class UnfinishController {
 //    查询出所有的待办
     @GetMapping("/findAll/{user_id}")
     @ApiOperation(value = "查询出所有待办")
-    @ApiImplicitParam(name="user_id",value = "用户的id",dataType = "string",paramType = "path",required = true)
-    public Json<Unfinish> findAll(@PathVariable String user_id)
+    @ApiImplicitParam(name="user_id",value = "用户的id",dataType = "int",paramType = "path",required = true)
+    public Json<Unfinish> findAll(@PathVariable int user_id)
     {
-        if(user_id != null)
+        User user = userService.find(user_id);
+
+
+        if(user != null)
         {
 
             return success(unfinishService.findAll(user_id));
@@ -149,10 +153,10 @@ public class UnfinishController {
     @ApiOperation("待办搜索功能")
     @PostMapping("/search/{user_id}/{thing}")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "user_id",value = "用户序号",dataType = "string",paramType = "path",required = true),
+            @ApiImplicitParam(name = "user_id",value = "用户的序号",dataType = "string",paramType = "path",required = true),
             @ApiImplicitParam(name = "thing",value = "搜索内容",dataType = "string",paramType = "path",required = true)
     })
-    public List<Unfinish> search(@PathVariable String user_id , @PathVariable String thing){
+    public List<Unfinish> search(@PathVariable int user_id , @PathVariable String thing){
         return unfinishService.search(user_id,thing);
     }
 

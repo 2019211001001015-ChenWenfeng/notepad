@@ -19,7 +19,7 @@ public class NoteServiceImpl implements NoteService {
     private NoteMapper noteMapper;
     @Override
     //通过用户名查询所有笔记
-    public List<Note> findAll(String user_id) {
+    public List<Note> findAll(int user_id) {
         return noteMapper.findAll(user_id);
     }
 
@@ -104,7 +104,7 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public List<Note> search(String user_id, String thing) {
+    public List<Note> search(int user_id, String thing) {
         return noteMapper.findAllByThing(user_id, thing);
 //        System.out.println(noteList);
     }

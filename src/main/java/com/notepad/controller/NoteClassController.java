@@ -29,11 +29,11 @@ public class NoteClassController {
     @ApiOperation(value = "新增笔记分类")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clas",value = "新增的类型",dataType = "string",paramType = "path",required = true),
-            @ApiImplicitParam(name = "user_id",value = "用户的id",dataType = "string",paramType = "path",required = true)
+            @ApiImplicitParam(name = "user_id",value = "用户的id",dataType = "int",paramType = "path",required = true)
     })
 
     @GetMapping("/addCla/{clas}/{user_id}")
-    public Json addCla(@PathVariable String clas,@PathVariable String user_id)
+    public Json addCla(@PathVariable String clas,@PathVariable int user_id)
     {
         int k = 0;
         List<Map<String,Object>> maps = noteClassService.findAll(user_id);
@@ -61,9 +61,9 @@ public class NoteClassController {
     //    查询出所有笔记分类信息
     @ApiOperation(value = "查询出所有笔记分类")
     @GetMapping("/findAllCla/{user_id}")
-    @ApiImplicitParam(name = "user_id",value = "用户的id",dataType = "String" ,paramType = "path",required = true)
+    @ApiImplicitParam(name = "user_id",value = "用户的id",dataType = "int" ,paramType = "path",required = true)
 
-    public Json<NoteClassService> findAllCla(@PathVariable String user_id) {
+    public Json<NoteClassService> findAllCla(@PathVariable int user_id) {
 
         List<Map<String,Object>> noteClasses = noteClassService.findAll(user_id);
         if (noteClasses.isEmpty()) {
