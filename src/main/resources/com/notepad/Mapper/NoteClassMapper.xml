@@ -6,7 +6,7 @@
 
     <select id="findAll" parameterType="Integer" resultType="java.util.Map">
         select DISTINCT note_class_name
-        from notepad.note_class left outer join note
+        from notepad.note_class left outer join notepad.note
         on note.note_class_id = note_class.note_class_id
        where note.user_id = #{user_id} or note_class.user_id = #{user_id};
     </select>
@@ -35,7 +35,7 @@
 
     <select id="find_class" parameterType="String" resultType="NoteClass">
         select *
-        from note_class
+        from notepad.note_class
         where note_class_name = #{note_class_name};
     </select>
 
