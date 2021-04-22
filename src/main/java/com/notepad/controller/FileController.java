@@ -3,18 +3,19 @@ package com.notepad.controller;
 import com.notepad.pojo.Json;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
 
+
 import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,14 +30,17 @@ import static com.notepad.utils.JsonData.success;
 public class FileController {
 
 
-    @PostMapping("/upload")
+    @PostMapping(value = "/upload",consumes = "multipart/*",headers = "content-type=multipart/form-data")
     @ApiOperation("文件上传")
-    public Json upload(MultipartFile img) throws IOException {
+    public Json upload(@ApiParam(value = "上传的文件",required = true) MultipartFile img) throws IOException {
+            
+        
 
         //处理文件上传
-
+            
 //        String realPath = request.getServletContext().getRealPath("/files");
-        String realPath = ResourceUtils.getURL("classpath:").getPath()+"static/files";
+        String realPath = ResourceUtils.getURL("classpath:").getPath()+"/static/files";
+        System.out.println(realPath);
         //日期目录创建
         String dateDir = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         File dir = new File(realPath,dateDir);
@@ -48,14 +52,17 @@ public class FileController {
         String newFileName = newFileNamePrefix + "." + extension;
 
 ///文件上传
-        img.transferTo(new File(dir,newFileName));
-        if(realPath != null)
-        {
-            return success();
-        }else
-        {
-            return fail();
-        }
+
+            if (img.getSize() < 2097152)
+            {
+                img.transferTo(new File(dir,newFileName));
+                return success();
+            }
+            else {
+                return fail();
+            }
+
+
 
     }
 }
