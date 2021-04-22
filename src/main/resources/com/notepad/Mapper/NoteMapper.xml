@@ -8,8 +8,8 @@
         select * from notepad.note
         where user_id = #{user_id} and delete_time is null
         order by top_time desc,note_date desc;
-
     </select>
+
     <select id="findAllByAll" resultType="Note">
         select * from notepad.note;
     </select>
@@ -50,13 +50,36 @@
 
     <select id="find_collect" parameterType="Integer" resultType="Integer">
         select note_collect
-        from note
+        from notepad.note
         where note_id = #{note_id};
     </select>
 
     <update id="update_collect" parameterType="Integer">
-        update note
+        update notepad.note
         set note_collect = #{collect}
         where note_id = #{note_id};
     </update>
+
+    <select id="findNoteNumber" parameterType="Integer" resultType="Integer">
+        select count(*) as 'noteNumber' from notepad.note
+        where user_id = #{user_id}
+        group by delete_time is not null
+        order by noteNumber desc;
+    </select>
+
+    <select id="findNoteClassNumber" parameterType="Integer" resultType="ClassNoteNumber">
+        select note_class_name,ifnull(count(note.note_class_id),0) as 'note_number'
+        from notepad.note_class left outer join notepad.note
+        on note.note_class_id = note_class.note_class_id
+        where note.user_id = #{user_id} or note_class.user_id = #{user_id}
+        group by note_class_name
+        order by note_number desc;
+    </select>
+
+    <select id="findNoteCollectNumber" parameterType="Integer" resultType="Integer">
+        select count(*) as 'collectNoteNumber' from notepad.note
+        where user_id = #{user_id} and delete_time is null and note_collect >0
+        group by user_id;
+    </select>
+
 </mapper>

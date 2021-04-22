@@ -1,5 +1,7 @@
 package com.notepad.mapper;
 
+import com.notepad.pojo.ClassNoteNumber;
+import com.notepad.pojo.ClassUnfinishNumber;
 import com.notepad.pojo.Note;
 import com.notepad.pojo.Unfinish;
 import org.apache.ibatis.annotations.Param;
@@ -35,5 +37,12 @@ public interface UnfinishMapper {
 //    查询出待办的收藏是0还是1
     int find_collect(int unfinish_id);
 
+    //查询删除和未删除的待办数量
+    List<Integer> findUnfinishNumber(@Param("user_id") int user_id);
 
+    //查询分类笔记数量
+    List<ClassUnfinishNumber> findUnfinishClassNumber(@Param("user_id") int user_id);
+
+    //收藏的待办数量
+    Integer findUnfinishCollectNumber(@Param("user_id") int user_id);
 }

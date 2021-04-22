@@ -47,16 +47,38 @@
 
     <select id="find_collect" parameterType="Integer" resultType="Integer">
         select unfinish_collect
-        from unfinish
+        from notepad.unfinish
         where unfinish_id = #{unfinish_id};
     </select>
 
     <update id="update_collect" parameterType="Integer">
-        update unfinish
+        update notepad.unfinish
         set unfinish_collect = #{collect}
         where unfinish_id = #{unfinish_id};
 
     </update>
+
+    <select id="findUnfinishNumber" parameterType="Integer" resultType="Integer">
+        select count(*) as 'unfinishNumber' from notepad.unfinish
+        where user_id = #{user_id}
+        group by delete_time is not null
+        order by unfinishNumber desc;
+    </select>
+
+    <select id="findUnfinishClassNumber" parameterType="Integer" resultType="ClassUnfinishNumber">
+        select unfinish_class_name,ifnull(count(unfinish.unfinish_class_id),0) as 'unfinish_number'
+        from notepad.unfinish_class left outer join notepad.unfinish
+        on unfinish.unfinish_class_id = unfinish_class.unfinish_class_id
+        where unfinish.user_id = #{user_id} or unfinish_class.user_id = #{user_id}
+        group by unfinish_class_name
+        order by unfinish_number desc;
+    </select>
+
+    <select id="findUnfinishCollectNumber" parameterType="Integer" resultType="Integer">
+        select count(*) as 'collectUnfinishNumber' from notepad.unfinish
+        where user_id = #{user_id} and delete_time is null and unfinish_collect >0
+        group by user_id;
+    </select>
 
 
 

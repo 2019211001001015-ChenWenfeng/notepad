@@ -22,6 +22,7 @@ import java.util.Set;
 import static com.notepad.utils.JsonData.fail;
 import static com.notepad.utils.JsonData.success;
 
+@CrossOrigin
 @Api(tags={"待办的接口"})
 @RestController
 @RequestMapping("/unfinish")
