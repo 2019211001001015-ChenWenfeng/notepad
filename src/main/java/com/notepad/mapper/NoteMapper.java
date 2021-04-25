@@ -11,7 +11,7 @@ public interface NoteMapper {
 
     List<Note> findAllByAll();
 
-    void add(Note note);
+    int add(Note note);
 
     void delete(int note_id);
 

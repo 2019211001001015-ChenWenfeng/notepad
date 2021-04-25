@@ -16,7 +16,7 @@ import java.util.List;
 public class User {
     @ApiModelProperty(name = "user_id",value = "用户id")
     private int user_id;
-    @ApiModelProperty(name = "user_open_id",value = "微信的id")
+    @ApiModelProperty(name = "user_open_id",value = "微信用户唯一标识的code")
     private String user_open_id;
     @ApiModelProperty(name = "username",value = "用户名")
     private String username;

@@ -9,7 +9,7 @@ import java.util.List;
 public interface NoteService {
     List<Note> findAll(int user_id);
     List<Note> findAllByAll();
-    void add(Note note);
+    int add(Note note);
     void delete(@Param("note_id")int note_id);
     void update(Note note);
 

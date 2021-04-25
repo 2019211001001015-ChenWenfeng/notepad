@@ -164,7 +164,7 @@ public class NoteController {
 
     @ApiOperation(value = "增加笔记")
     @PostMapping(value = "/insert",consumes = "multipart/*",headers = "content-type=multipart/form-data")
-    public Json insert(@ApiParam(value = "上传的文件",required = true) MultipartFile img,Note note) throws IOException {
+    public Json insert(@RequestParam("uploadFile") MultipartFile[] imgs,Note note) throws IOException {
         String realPath = ResourceUtils.getURL("classpath:").getPath()+"/static/files";
         System.out.println(realPath);
         //日期目录创建
@@ -172,28 +172,52 @@ public class NoteController {
         File dir = new File(realPath,dateDir);
         if(!dir.exists())
             dir.mkdirs();
+
+
+
+        String[] newFileName = new String[10];
+        String newFileNameAll = null;
         //修改文件名
-        String newFileNamePrefix = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+ UUID.randomUUID().toString();
-        String extension = FilenameUtils.getExtension(img.getOriginalFilename());
-        String newFileName = newFileNamePrefix + "." + extension+",";
-        System.out.println(newFileName);
-
-///文件上传
-
-        if (img.getSize() < 2097152)
+        if(imgs.length != 0)
         {
-            img.transferTo(new File(dir,newFileName));
-            note.setNote_date(new Date());
-            note.setNote_pic(newFileName);
-            noteService.add(note);
-            return success();
+            for(int i=0;i < imgs.length;i++)
+            {
+                String newFileNamePrefix = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+ UUID.randomUUID().toString();
+                String extension = FilenameUtils.getExtension(imgs[i].getOriginalFilename());
+                newFileName[i] = newFileNamePrefix + "." + extension+",";
+                System.out.println(newFileName[i]);
+
+                ///文件上传
+//              文件大小不能越界
+                if (imgs[i].getSize() < 2097152)
+                {
+                    imgs[i].transferTo(new File(dir,newFileName[i]));
+
+                }
+                if(newFileNameAll == null)
+                {
+                    newFileNameAll = newFileName[i];
+                }
+                else
+                {
+                    newFileNameAll = newFileNameAll + newFileName[i];
+
+                }
+
+            }
         }
-        else {
+//         设置时间戳
+        note.setNote_date(new Date());
+        note.setNote_pic(newFileNameAll);
+        int m =noteService.add(note);
+
+        if(m!=0)
+        {
+            return success(note);
+        }else
+        {
             return fail();
         }
-
-
-
 
     }
 
