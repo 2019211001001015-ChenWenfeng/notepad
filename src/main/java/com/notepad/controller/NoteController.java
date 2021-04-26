@@ -7,19 +7,25 @@ import com.notepad.service.NoteService;
 import com.notepad.service.UserService;
 import com.notepad.utils.JsonData;
 import io.swagger.annotations.*;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static com.notepad.utils.JsonData.fail;
 import static com.notepad.utils.JsonData.success;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/note")
 @Api(tags={"笔记的接口"})
@@ -150,10 +156,67 @@ public class NoteController {
         }else{
             return fail();
         }
+    }
+
+    @ApiOperation(value = "增加笔记")
+    @PostMapping(value = "/insert",consumes = "multipart/*",headers = "content-type=multipart/form-data")
+    public Json insert(@RequestParam("uploadFile") MultipartFile[] imgs,Note note) throws IOException {
+        String realPath = ResourceUtils.getURL("classpath:").getPath()+"/static/files";
+        System.out.println(realPath);
+        //日期目录创建
+        String dateDir = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        File dir = new File(realPath,dateDir);
+        if(!dir.exists())
+            dir.mkdirs();
 
 
+
+        String[] newFileName = new String[10];
+        String newFileNameAll = null;
+        //修改文件名
+        if(imgs.length != 0)
+        {
+            for(int i=0;i < imgs.length;i++)
+            {
+                String newFileNamePrefix = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+ UUID.randomUUID().toString();
+                String extension = FilenameUtils.getExtension(imgs[i].getOriginalFilename());
+                newFileName[i] = newFileNamePrefix + "." + extension+",";
+                System.out.println(newFileName[i]);
+
+                ///文件上传
+//              文件大小不能越界
+                if (imgs[i].getSize() < 2097152)
+                {
+                    imgs[i].transferTo(new File(dir,newFileName[i]));
+
+                }
+                if(newFileNameAll == null)
+                {
+                    newFileNameAll = newFileName[i];
+                }
+                else
+                {
+                    newFileNameAll = newFileNameAll + newFileName[i];
+
+                }
+
+            }
+        }
+//         设置时间戳
+        note.setNote_date(new Date());
+        note.setNote_pic(newFileNameAll);
+        int m =noteService.add(note);
+
+        if(m!=0)
+        {
+            return success(note);
+        }else
+        {
+            return fail();
+        }
 
     }
+
 
 
 }

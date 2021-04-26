@@ -47,8 +47,8 @@ public class NoteServiceImpl implements NoteService {
 
     //新增笔记功能
     @Override
-    public void add(Note note) {
-        noteMapper.add(note);
+    public int add(Note note) {
+        return noteMapper.add(note);
     }
 
     //删除笔记功能

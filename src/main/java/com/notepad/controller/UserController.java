@@ -28,13 +28,14 @@ public class UserController {
 
 
     @GetMapping("/login/{code}")
+    @ApiImplicitParam(name="code",value = "用户的code",dataType = "String",paramType = "path",required = true)
     @ApiOperation("登录功能")
 //    登录方法
-    public Json<User> login(String code,@RequestBody User user){
+    public Json<User> login(String code,User user){
         String url = "https://api.weixin.qq.com/sns/jscode2session";
         Map<String, String> param = new HashMap<String, String>();
-        param.put("appid", "wx2f2c7c617b0ae5f8");
-        param.put("secret", "705bee5d5b0a3418bda834fc60c0ac8a");
+        param.put("appid", "wxf3db388fca705614");
+        param.put("secret", "b103f4ded749c94f84ea5304bfacb0bb");
         param.put("js_code", code);
         param.put("grant_type", "authorization_code");
 
@@ -42,28 +43,34 @@ public class UserController {
         WXSessionModel wxSessionModel = JsonUtils.jsonToPojo(wxResult, WXSessionModel.class);
 
         String openid = wxSessionModel.getOpenid();
+        String session_key = wxSessionModel.getSession_key();
+
+        Map<String,String> result = new HashMap<>();
+        result.put("openid",openid);
+        result.put("session_key",session_key);
+
 
         User user1 = userService.find_openId(openid);
         if(user1 != null)
         {
 //            老用户
+            user1.setHead_portrait(user.getHead_portrait());
             user1.setUser_login_time(new Date());
 //            这里可能会有问题
             userService.update(user1);
-            return success(user1);
+            return success(result);
         }else{
 
             // 新用户，添加到数据库
+            user1.setUser_open_id(openid);
+            user1.setUser_login_time(new Date());
             Boolean flag = userService.add(user);
             if(!flag){
 
                 return fail();
             }
-            else
-            {
 
-                return success(user1);
-            }
+            return success(result);
 
         }
 
