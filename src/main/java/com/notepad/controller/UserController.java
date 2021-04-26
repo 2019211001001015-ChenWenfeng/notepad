@@ -9,7 +9,6 @@ import com.notepad.utils.HttpClientUtil;
 import com.notepad.utils.JsonUtils;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;

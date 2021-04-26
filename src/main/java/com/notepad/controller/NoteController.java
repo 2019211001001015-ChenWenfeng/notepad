@@ -60,10 +60,6 @@ public class NoteController {
         System.out.println(noteList);
         return noteList;
     }
-
-
-
-
     //    查询出所有的笔记
     @GetMapping("/findAll/{user_id}")
     @ApiOperation(value = "查询出所有笔记")

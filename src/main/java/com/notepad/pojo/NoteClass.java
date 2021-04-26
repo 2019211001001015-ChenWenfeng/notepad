@@ -25,4 +25,6 @@ public class NoteClass {//属性值为private不能加swagger属性注解
     @ApiModelProperty(value = "笔记分类名称")
     private String note_class_name;
 
+
+
 }

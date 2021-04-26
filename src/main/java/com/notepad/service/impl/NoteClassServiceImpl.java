@@ -16,6 +16,7 @@ import java.util.Map;
 public class NoteClassServiceImpl implements NoteClassService {
     @Autowired
     private NoteClassMapper noteClassMapper;
+
     @Override
     public List<Map<String,Object>> findAll(int user_id) {
         return noteClassMapper.findAll(user_id);

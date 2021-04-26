@@ -3,10 +3,12 @@ package com.notepad.mapper;
 import com.notepad.pojo.NoteClass;
 import com.notepad.pojo.UnfinishClass;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public interface NoteClassMapper {
     List<Map<String,Object>>findAll(int user_id);
 
