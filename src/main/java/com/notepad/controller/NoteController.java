@@ -78,7 +78,7 @@ public class NoteController {
     @GetMapping("/findAll/{user_id}")
     @ApiOperation(value = "查询出所有笔记")
     @ApiImplicitParam(name = "user_id", value = "用户的id", dataType = "int", paramType = "path", required = true)
-    public Json<Unfinish> findAll(@PathVariable int user_id) {
+    public Json<Note> findAll(@PathVariable int user_id) {
 
 
         if (userService.find(user_id) != null) {
@@ -94,7 +94,7 @@ public class NoteController {
     @GetMapping("/find/{id}")
     @ApiOperation(value = "查询出单个笔记")
     @ApiImplicitParam(name = "id", value = "笔记的id", dataType = "int", paramType = "path", required = true)
-    public Json<Unfinish> find(@PathVariable int id) {
+    public Json<Note> find(@PathVariable int id) {
         Note note = noteService.find(id);
         if (note != null) {
             return success(note);
@@ -112,7 +112,7 @@ public class NoteController {
             @ApiImplicitParam(name = "id", value = "笔记的id", dataType = "int", paramType = "path", required = true),
             @ApiImplicitParam(name = "clas", value = "笔记的类型", dataType = "string", paramType = "path", required = true)
     })
-    public Json<Unfinish> classify(@PathVariable int id, @PathVariable String clas) {
+    public Json<Note> classify(@PathVariable int id, @PathVariable String clas) {
 
         Note note = noteService.find(id);
         if (note != null) {
@@ -156,7 +156,7 @@ public class NoteController {
     @ApiOperation(value = "增加笔记")
     @PostMapping(value = "/insert/{openId}", consumes = "multipart/*", headers = "content-type=multipart/form-data")
     @ApiImplicitParam(value = "用户的openid",name = "openId",dataType = "string", paramType = "path", required = true)
-    public Json insert(@RequestParam("uploadFile") MultipartFile[] imgs,  Note note,@PathVariable String openId) throws IOException {
+    public Json<Note> insert(@RequestParam("uploadFile") MultipartFile[] imgs,  Note note,@PathVariable String openId) throws IOException {
         User user = userService.find_openId(openId);
         note.setUser_id(user.getUser_id());
 
