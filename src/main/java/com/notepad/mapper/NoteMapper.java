@@ -3,9 +3,9 @@ package com.notepad.mapper;
 import com.notepad.pojo.ClassNoteNumber;
 import com.notepad.pojo.Note;
 import org.apache.ibatis.annotations.Param;
-
+import org.springframework.stereotype.Repository;
 import java.util.List;
-
+@Repository
 public interface NoteMapper {
     List<Note> findAll(int user_id);
 

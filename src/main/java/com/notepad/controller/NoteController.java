@@ -26,6 +26,7 @@ import java.util.UUID;
 import static com.notepad.utils.JsonData.fail;
 import static com.notepad.utils.JsonData.success;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/note")
 @Api(tags={"笔记的接口"})

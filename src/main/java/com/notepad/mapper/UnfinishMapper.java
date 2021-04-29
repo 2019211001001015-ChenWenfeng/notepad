@@ -5,10 +5,11 @@ import com.notepad.pojo.ClassUnfinishNumber;
 import com.notepad.pojo.Note;
 import com.notepad.pojo.Unfinish;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public interface UnfinishMapper {
     //通过用户查询用户所有待办
     List<Unfinish> findAll(int user_id);

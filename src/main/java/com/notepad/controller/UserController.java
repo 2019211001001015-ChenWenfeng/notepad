@@ -18,7 +18,7 @@ import java.util.Map;
 import static com.notepad.utils.JsonData.fail;
 import static com.notepad.utils.JsonData.success;
 
-
+@CrossOrigin
 @Api(tags={"用户的接口"})
 @RestController
 @RequestMapping("/user")

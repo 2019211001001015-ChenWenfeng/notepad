@@ -12,7 +12,6 @@ import java.util.Map;
 
 @Service
 @Transactional
-
 public class NoteClassServiceImpl implements NoteClassService {
     @Autowired
     private NoteClassMapper noteClassMapper;
