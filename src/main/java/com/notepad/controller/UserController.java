@@ -7,6 +7,7 @@ import com.notepad.pojo.WXSessionModel;
 import com.notepad.service.UserService;
 import com.notepad.utils.HttpClientUtil;
 import com.notepad.utils.JsonUtils;
+import com.notepad.utils.LoginUtils;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.Map;
 
 import static com.notepad.utils.JsonData.fail;
 import static com.notepad.utils.JsonData.success;
+import static com.notepad.utils.LoginUtils.getUrl;
 
 @CrossOrigin
 @Api(tags={"用户的接口"})
@@ -31,23 +33,22 @@ public class UserController {
     @ApiImplicitParam(name="code",value = "用户的code",dataType = "String",paramType = "path",required = true)
     @ApiOperation("登录功能")
 //    登录方法
-    public Json<User> login(String code,User user){
-        String url = "https://api.weixin.qq.com/sns/jscode2session";
+    public Json<User> login(@PathVariable String code,@RequestBody User user){
         Map<String, String> param = new HashMap<String, String>();
         param.put("appid", "wxf3db388fca705614");
         param.put("secret", "b103f4ded749c94f84ea5304bfacb0bb");
-        param.put("js_code", code);
         param.put("grant_type", "authorization_code");
+        param.put("js_code", code);
 
-        String wxResult = HttpClientUtil.doGet(url, param);
+
+        String wxResult = HttpClientUtil.doGet(getUrl(), param);
         WXSessionModel wxSessionModel = JsonUtils.jsonToPojo(wxResult, WXSessionModel.class);
 
         String openid = wxSessionModel.getOpenid();
-        String session_key = wxSessionModel.getSession_key();
 
         Map<String,String> result = new HashMap<>();
         result.put("openid",openid);
-        result.put("session_key",session_key);
+        result.put("code",code);
 
 
         User user1 = userService.find_openId(openid);

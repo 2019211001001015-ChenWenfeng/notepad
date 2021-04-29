@@ -18,7 +18,7 @@
         order by top_time  desc,unfinish_date desc;
     </select>
 
-    <insert id="add" parameterType="Unfinish">
+    <insert id="add">
         insert into notepad.unfinish(user_id,unfinish_content,unfinish_date,unfinish_class_id,unfinish_collect,complete,top_time,delete_time)
         values (#{user_id},#{unfinish_content},#{unfinish_date},#{unfinish_class_id},#{unfinish_collect},#{complete},#{top_time},#{delete_time});
     </insert>
