@@ -190,9 +190,9 @@ public class NoteController {
                     }
 
                 if (newFileNameAll == null) {
-                    newFileNameAll = AppConstant.FILE_URL+newFileName[i]+",";
+                    newFileNameAll = AppConstant.FILE_URL+AppConstant.FILE_URL+newFileName[i]+",";
                 } else {
-                    newFileNameAll = newFileNameAll + newFileName[i]+",";
+                    newFileNameAll = AppConstant.FILE_URL+newFileNameAll + newFileName[i]+",";
 
                 }
 
