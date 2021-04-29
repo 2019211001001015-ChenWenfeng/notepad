@@ -160,7 +160,7 @@ public class NoteController {
         User user = userService.find_openId(openId);
         note.setUser_id(user.getUser_id());
 
-        String realPath = ResourceUtils.getURL("D://fengge").getPath() ;
+        String realPath = ResourceUtils.getURL(AppConstant.FILE_PATH).getPath() ;
         System.out.println(realPath);
 
 
@@ -190,7 +190,7 @@ public class NoteController {
                     }
 
                 if (newFileNameAll == null) {
-                    newFileNameAll = newFileName[i]+",";
+                    newFileNameAll = AppConstant.FILE_URL+newFileName[i]+",";
                 } else {
                     newFileNameAll = newFileNameAll + newFileName[i]+",";
 
