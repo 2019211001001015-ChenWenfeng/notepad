@@ -5,7 +5,10 @@ import com.notepad.pojo.*;
 import com.notepad.service.UnfinishClassService;
 import com.notepad.service.UnfinishService;
 import com.notepad.service.UserService;
+import com.notepad.utils.HttpClientUtil;
 import com.notepad.utils.JsonData;
+import com.notepad.utils.JsonUtils;
+import com.notepad.utils.LoginUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -17,10 +20,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
 
 import static com.notepad.utils.JsonData.fail;
 import static com.notepad.utils.JsonData.success;
+import static com.notepad.utils.LoginUtils.getUrl;
 
 @CrossOrigin
 @Api(tags={"待办的接口"})
@@ -36,15 +40,28 @@ public class UnfinishController {
     private UserService userService;
 
 //  添加待办
-    @GetMapping("/add/{unfinish}")
+    @GetMapping("/add")
     @ApiOperation(value = "添加待办")
-    @ApiImplicitParam(name = "unfinish",value = "待办",dataType = "Unfinish",required = true)
-    public Json<Unfinish> add(@PathVariable Unfinish unfinish)
+    @ApiImplicitParam(value = "code",name = "用户的code",dataType = "String",paramType = "path",required = true)
+    public Json<Unfinish> add(@PathVariable String code,Unfinish unfinish)
     {
-        int complete = 0;
+        Map<String, String> param;
+        param = LoginUtils.getParam();
+        param.put("js_code", code);
+
+
+        String wxResult = HttpClientUtil.doGet(getUrl(), param);
+        WXSessionModel wxSessionModel = JsonUtils.jsonToPojo(wxResult, WXSessionModel.class);
+
+        String openid = wxSessionModel.getOpenid();
+
+         User user = userService.find_openId(openid);
+         unfinish.setUser_id(user.getUser_id());
+
+
         if(unfinish != null)
         {
-            unfinish.setComplete(complete);
+
             unfinishService.add(unfinish);
             return success(unfinish);
 
