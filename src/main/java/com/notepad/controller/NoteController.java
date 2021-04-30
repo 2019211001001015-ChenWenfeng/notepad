@@ -154,9 +154,8 @@ public class NoteController {
     }
 
     @ApiOperation(value = "增加笔记")
-    @PostMapping(value = "/insert/{openId}", consumes = "multipart/*", headers = "content-type=multipart/form-data")
-    @ApiImplicitParam(value = "用户的openid",name = "openId",dataType = "string", paramType = "path", required = true)
-    public Json<Note> insert(@RequestParam("uploadFile") MultipartFile[] imgs,  Note note,@PathVariable String openId) throws IOException {
+    @PostMapping(value = "/insert", consumes = "multipart/*", headers = "content-type=multipart/form-data")
+    public Json<Note> insert(@RequestParam("uploadFile") MultipartFile[] imgs,  Note note,@RequestParam("openId") String openId) throws IOException {
         User user = userService.find_openId(openId);
         note.setUser_id(user.getUser_id());
 
@@ -192,7 +191,7 @@ public class NoteController {
                 if (newFileNameAll == null) {
                     newFileNameAll = AppConstant.FILE_URL+newFileName[i]+",";
                 } else {
-                    newFileNameAll = newFileNameAll + newFileName[i]+",";
+                    newFileNameAll =  newFileNameAll + AppConstant.FILE_URL + newFileName[i]+",";
 
                 }
 
