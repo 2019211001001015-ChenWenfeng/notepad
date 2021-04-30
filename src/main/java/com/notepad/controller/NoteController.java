@@ -165,10 +165,10 @@ public class NoteController {
 
 
         //日期目录创建
-        String dateDir = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        File dir = new File(realPath, dateDir);
-        if (!dir.exists())
-            dir.mkdirs();
+//        String dateDir = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        File dir = new File(realPath);
+//        if (!dir.exists())
+//            dir.mkdirs();
 
 
         String[] newFileName = new String[10];
