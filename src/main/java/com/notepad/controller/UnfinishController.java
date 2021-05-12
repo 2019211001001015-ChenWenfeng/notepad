@@ -137,44 +137,61 @@ public class UnfinishController {
     }
 
     @ApiOperation("待办置顶功能的设置")
-    @PostMapping("/setTop/{unfinish_id}")
+    @GetMapping("/setTop/{unfinish_id}")
     @ApiImplicitParam(name = "unfinish_id",value = "待办序号",dataType = "int",paramType = "path",required = true)
-    public String noteSetTop(@PathVariable int unfinish_id,Model model){
+    public Json<Unfinish> noteSetTop(@PathVariable int unfinish_id){
         unfinishService.unfinishSetTop(unfinish_id);
         Unfinish unfinish = unfinishService.find(unfinish_id);
-        return unfinish.toString();//到时候在修改
+        if (unfinish!=null){
+            return success(unfinish);//到时候在修改
+        }else {
+            return fail();
+        }
+
     }
 
 
     @ApiOperation("待办删除到回收站功能")
-    @PostMapping("/delete/{unfinish_id}")
+    @GetMapping("/delete/{unfinish_id}")
     @ApiImplicitParam(name = "unfinish_id",value = "待办序号",dataType = "int",paramType = "path",required = true)
-    public String deleteToRecover(@PathVariable int unfinish_id){
+    public Json<Unfinish> deleteToRecover(@PathVariable int unfinish_id){
         unfinishService.deleteToRecover(unfinish_id);
         Unfinish unfinish = unfinishService.find(unfinish_id);
-        return unfinish.toString();//到时候在修改
+        if (unfinish!=null){
+            return success(unfinish);
+        }else {
+            return fail();
+        }
     }
 
 
     @ApiOperation("待办完成功能")
-    @PostMapping("/complete/{unfinish_id}")
+    @GetMapping("/complete/{unfinish_id}")
     @ApiImplicitParam(name = "unfinish_id",value = "待办序号",dataType = "int",paramType = "path",required = true)
-    public String complete(@PathVariable int unfinish_id){
+    public Json<Unfinish> complete(@PathVariable int unfinish_id){
         unfinishService.complete(unfinish_id);
         Unfinish unfinish = unfinishService.find(unfinish_id);
-        return unfinish.toString();//到时候在修改
+        if (unfinish!=null){
+            return success(unfinish);
+        }
+        return fail();
+        //到时候在修改
         //        System.out.println("置顶时间"+unfinish.getComplete());
     }
 
 
     @ApiOperation("待办搜索功能")
-    @PostMapping("/search/{user_id}/{thing}")
+    @GetMapping("/search/{user_id}/{thing}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "user_id",value = "用户的序号",dataType = "string",paramType = "path",required = true),
             @ApiImplicitParam(name = "thing",value = "搜索内容",dataType = "string",paramType = "path",required = true)
     })
-    public List<Unfinish> search(@PathVariable int user_id , @PathVariable String thing){
-        return unfinishService.search(user_id,thing);
+    public Json<Unfinish> search(@PathVariable int user_id , @PathVariable String thing){
+        List<Unfinish> unfinishList = unfinishService.search(user_id, thing);
+        if (unfinishList!=null){
+            return success(unfinishList);
+        }
+        return fail();
     }
 
 

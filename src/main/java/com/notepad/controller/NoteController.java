@@ -5,11 +5,12 @@ import com.notepad.pojo.*;
 import com.notepad.service.NoteClassService;
 import com.notepad.service.NoteService;
 import com.notepad.service.UserService;
-import com.notepad.utils.*;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,17 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import static com.notepad.utils.JsonData.fail;
 import static com.notepad.utils.JsonData.success;
-import static com.notepad.utils.LoginUtils.getUrl;
 
 @CrossOrigin
 @RestController
@@ -47,30 +43,45 @@ public class NoteController {
     private UserService userService;
 
     @ApiOperation("笔记置顶功能的设置")
-    @PostMapping("/setTop/{note_id}")
+    @GetMapping("/setTop/{note_id}")
     @ApiImplicitParam(name = "note_id", value = "笔记序号", dataType = "int", paramType = "path", required = true)
-    public void noteSetTop(@PathVariable int note_id, Model model) {
+    public Json<Note> noteSetTop(@PathVariable int note_id) {
         noteService.noteSetTop(note_id);
+        Note note = noteService.find(note_id);
+        if (note!=null){
+            return success(note);
+        }else {
+            return fail();
+        }
     }
 
 
     @ApiOperation("笔记删除到回收站功能")
-    @PostMapping("/delete/{note_id}")
+    @GetMapping("/delete/{note_id}")
     @ApiImplicitParam(name = "note_id", value = "笔记序号", dataType = "int", paramType = "path", required = true)
-    public void deleteToRecover(@PathVariable int note_id) {
+    public Json<Note> deleteToRecover(@PathVariable int note_id) {
         noteService.deleteToRecover(note_id);
+        Note note = noteService.find(note_id);
+        if (note!=null){
+            return success(note);
+        }else {
+            return fail();
+        }
     }
 
     @ApiOperation("笔记搜索功能")
-    @PostMapping("/search/{user_id}/{thing}")
+    @GetMapping("/search/{user_id}/{thing}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "user_id", value = "用户序号", dataType = "int", paramType = "path", required = true),
             @ApiImplicitParam(name = "thing", value = "搜索内容", dataType = "string", paramType = "path", required = true)
     })
-    public List<Note> search(@PathVariable int user_id, @PathVariable String thing) {
+    public Json<Note> search(@PathVariable int user_id, @PathVariable String thing) {
         List<Note> noteList = noteService.search(user_id, thing);
         System.out.println(noteList);
-        return noteList;
+        if (noteList!=null){
+            return success(noteList);
+        }
+        return fail();
     }
 
 
