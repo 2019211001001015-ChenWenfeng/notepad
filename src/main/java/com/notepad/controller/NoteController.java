@@ -166,7 +166,7 @@ public class NoteController {
 
     @ApiOperation(value = "增加笔记")
     @PostMapping(value = "/insert", consumes = "multipart/*", headers = "content-type=multipart/form-data")
-    public Json<Note> insert(@RequestParam("uploadFile") MultipartFile[] imgs,  Note note,@RequestParam("openId") String openId) throws IOException {
+    public Json<Note> insert(MultipartFile[] imgs,  Note note,@RequestParam("openId") String openId) throws IOException {
         User user = userService.find_openId(openId);
         note.setUser_id(user.getUser_id());
 
